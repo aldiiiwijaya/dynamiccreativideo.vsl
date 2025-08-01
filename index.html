@@ -1,7 +1,20 @@
-<html>
+<!DOCTYPE html>
+<html lang="id">
 <head>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Gallery Project</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
 <style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+font-family: 'Inter', sans-serif;
+background: #0f0f1a;
+color: #fff;
+overflow-x: hidden;
+}
+
 /* === ENHANCED NAVBAR WITH THEME MATCHING === */
 :root {
 --primary: #7A66CC;
@@ -351,6 +364,226 @@ opacity: 1!important;
 visibility: visible!important;
 }
 
+/* Back Button */
+.back-btn {
+background: linear-gradient(50deg, #7A66CC, #7A66CCAA);
+color: #fff;
+border: none;
+padding: 0.6rem 1.2rem;
+border-radius: 20px;
+font-size: 14px;
+font-weight: 500;
+cursor: pointer;
+transition: all 0.3s ease;
+display: none;
+align-items: center;
+gap: 0.5rem;
+position: relative;
+z-index: 1000000;
+}
+
+.back-btn.visible {
+display: flex;
+}
+
+.back-btn:hover {
+transform: translateY(-2px);
+box-shadow: 0 8px 25px rgba(122, 102, 204, 0.3);
+background: linear-gradient(50deg, #8B77DD, #7A66CC);
+}
+
+.back-icon {
+font-size: 16px;
+}
+
+/* Main content with top padding for fixed header */
+.main-content {
+padding-top: 80px;
+min-height: 100vh;
+}
+
+.gproj-gallery-wrapper {
+padding: 2rem 20px;
+margin: 0 auto;
+max-width: 1240px;
+}
+
+.gproj-videos-grid {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 1.5rem;
+max-width: 1200px;
+margin: 0 auto;
+}
+
+.gproj-video-item {
+background: #1a1a2e;
+border: 1px solid rgba(122, 102, 204, 0.2);
+border-radius: 20px;
+padding: 1.5rem;
+transition: all 0.3s ease;
+position: relative;
+overflow: hidden;
+display: flex;
+flex-direction: column;
+box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.gproj-video-item:hover {
+transform: translateY(-8px);
+border-color: #7A66CC;
+box-shadow: 0 25px 50px rgba(122, 102, 204, 0.25);
+}
+
+.gproj-video-thumbnail {
+position: relative;
+width: 100%;
+aspect-ratio: 16/9;
+overflow: hidden;
+border-radius: 15px;
+margin-bottom: 1rem;
+flex-shrink: 0;
+}
+
+.gproj-video-thumbnail iframe {
+width: 100%;
+height: 100%;
+border: none;
+transition: transform 0.3s ease;
+}
+
+.gproj-video-info {
+text-align: center;
+flex-grow: 1;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+}
+
+.gproj-video-title {
+font-size: 18px;
+font-weight: 600;
+line-height: 1.2;
+margin-bottom: 0.5rem;
+color: #fff;
+}
+
+.gproj-video-description {
+color: rgba(255, 255, 255, 0.6);
+font-size: 14px;
+font-weight: 300;
+line-height: 1.3;
+margin-bottom: 1rem;
+}
+
+.gproj-project-btn {
+background: linear-gradient(50deg, #7A66CC, #7A66CCAA);
+color: #fff;
+border: none;
+padding: 0.7rem 1.5rem;
+border-radius: 20px;
+font-size: 14px;
+font-weight: 500;
+cursor: pointer;
+transition: all 0.3s ease;
+align-self: center;
+}
+
+.gproj-project-btn:hover {
+transform: translateY(-2px);
+box-shadow: 0 8px 25px rgba(122, 102, 204, 0.3);
+background: linear-gradient(50deg, #8B77DD, #7A66CC);
+}
+
+.client-detail-page {
+display: none;
+padding: 2rem 20px;
+margin: 0 auto;
+max-width: 1240px;
+}
+
+.client-detail-page.active {
+display: block;
+animation: fadeIn 0.5s ease-out;
+}
+
+.detail-header {
+text-align: center;
+margin-bottom: 3rem;
+}
+
+.detail-title {
+font-size: 2.5rem;
+font-weight: 600;
+background: linear-gradient(135deg, #7A66CC, #9B8CE8);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+margin-bottom: 1rem;
+}
+
+.detail-description {
+color: rgba(255, 255, 255, 0.7);
+font-size: 1.1rem;
+max-width: 600px;
+margin: 0 auto;
+line-height: 1.6;
+}
+
+.videos-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+gap: 2rem;
+margin-top: 2rem;
+}
+
+.video-card {
+background: #1a1a2e;
+border: 1px solid rgba(122, 102, 204, 0.2);
+border-radius: 20px;
+padding: 1.5rem;
+transition: all 0.3s ease;
+box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.video-card:hover {
+transform: translateY(-5px);
+border-color: #7A66CC;
+box-shadow: 0 20px 40px rgba(122, 102, 204, 0.2);
+}
+
+.video-wrapper {
+position: relative;
+width: 100%;
+aspect-ratio: 16/9;
+overflow: hidden;
+border-radius: 15px;
+margin-bottom: 1rem;
+background: #000;
+}
+
+.video-wrapper iframe {
+width: 100%;
+height: 100%;
+border: none;
+}
+
+.video-title {
+font-size: 1.2rem;
+font-weight: 600;
+color: #fff;
+text-align: center;
+}
+
+.main-gallery.hidden {
+display: none;
+}
+
+@keyframes fadeIn {
+from { opacity: 0; transform: translateY(20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
 /* Responsive Design */
 @media(min-width:769px) {
 .hnavbar-nav-links {
@@ -371,6 +604,59 @@ padding: .5rem 1.5rem!important;
 .hnavbar-mobile-menu {
 width: 220px!important;
 }
+
+.main-content {
+padding-top: 70px;
+}
+
+.gproj-gallery-wrapper, .client-detail-page { 
+padding: 1.5rem 15px; 
+}
+
+.gproj-videos-grid { 
+grid-template-columns: 1fr; 
+gap: 1.5rem; 
+}
+
+.gproj-video-item { 
+max-width: 400px; 
+margin: 0 auto;
+padding: 1.2rem;
+}
+
+.gproj-video-title {
+font-size: 16px;
+}
+
+.gproj-video-description {
+font-size: 13px;
+}
+
+.gproj-project-btn {
+padding: 0.6rem 1.2rem;
+font-size: 13px;
+}
+
+.detail-title { 
+font-size: 2rem; 
+}
+
+.detail-description {
+font-size: 1rem;
+}
+
+.videos-grid { 
+grid-template-columns: 1fr; 
+gap: 1.5rem; 
+}
+
+.video-card {
+padding: 1.2rem;
+}
+
+.video-title {
+font-size: 1.1rem;
+}
 }
 
 @media(max-width:480px) {
@@ -386,6 +672,77 @@ padding: 5rem 1rem 2rem!important;
 }
 .hnavbar-logo {
 font-size: 1rem!important;
+}
+
+.main-content {
+padding-top: 65px;
+}
+
+.gproj-gallery-wrapper, .client-detail-page { 
+padding: 1rem 10px; 
+}
+
+.gproj-video-item {
+padding: 1rem;
+border-radius: 15px;
+}
+
+.gproj-video-thumbnail {
+border-radius: 12px;
+}
+
+.gproj-video-title {
+font-size: 15px;
+}
+
+.gproj-video-description {
+font-size: 12px;
+}
+
+.gproj-project-btn {
+padding: 0.5rem 1rem;
+font-size: 12px;
+border-radius: 15px;
+}
+
+.detail-title { 
+font-size: 1.8rem; 
+}
+
+.detail-description {
+font-size: 0.95rem;
+}
+
+.video-card { 
+padding: 1rem;
+border-radius: 15px;
+}
+
+.video-wrapper {
+border-radius: 12px;
+}
+
+.video-title {
+font-size: 1rem;
+}
+}
+
+/* Additional mobile enhancements */
+@media (max-width: 375px) {
+.hnavbar-logo {
+font-size: 1rem!important;
+}
+
+.gproj-video-item {
+max-width: 100%;
+}
+
+.detail-title {
+font-size: 1.6rem;
+}
+
+.detail-description {
+font-size: 0.9rem;
 }
 }
 
@@ -431,17 +788,37 @@ transform: none!important;
 transform: none!important;
 }
 }
+
+/* Smooth scrolling */
+html {
+scroll-behavior: smooth;
+}
+
+/* Loading states */
+.loading {
+opacity: 0.7;
+pointer-events: none;
+}
+
+/* Focus states for accessibility */
+.back-btn:focus,
+.gproj-project-btn:focus {
+outline: 2px solid #7A66CC;
+outline-offset: 2px;
+}
 </style>
 </head>
 <body>
+
+<!-- Enhanced Navigation -->
 <div class="hnavbar" id="hNavbar">
-<a href="#home" class="hnavbar-logo">Dynamic Creative</a>
+<a href="https://dynamiccreative.crd.co/#home" class="hnavbar-logo">Dynamic Creative</a>
 <div class="hnavbar-nav-links">
-<a href="#home" class="active">Home</a>
-<a href="#services">Services</a>
+<a href="https://dynamiccreative.crd.co/#home" class="active">Home</a>
+<a href="https://dynamiccreative.crd.co/#services">Services</a>
 <a href="#gallery">Gallery</a>
-<a href="#clients">Clients</a>
-<a href="#contact">Contact</a>
+<a href="https://dynamiccreative.crd.co/#clients">Clients</a>
+<a href="https://dynamiccreative.crd.co/#contact">Contact</a>
 </div>
 <div class="hnavbar-hamburger" id="hHamburger">
 <span></span>
@@ -450,14 +827,176 @@ transform: none!important;
 </div>
 </div>
 <div class="hnavbar-mobile-menu" id="hMobileMenu">
-<a href="#home" class="active">Home</a>
-<a href="#services">Services</a>
+<a href="https://dynamiccreative.crd.co/#home" class="active">Home</a>
+<a href="https://dynamiccreative.crd.co/#services">Services</a>
 <a href="#gallery">Gallery</a>
-<a href="#clients">Clients</a>
-<a href="#contact">Contact</a>
+<a href="https://dynamiccreative.crd.co/#clients">Clients</a>
+<a href="https://dynamiccreative.crd.co/#contact">Contact</a>
 </div>
 <div class="hnavbar-overlay" id="hOverlay"></div>
+
+<!-- Back Button for Detail Pages -->
+<button class="back-btn" onclick="showMainGallery()" id="backButton">
+<span class="back-icon">←</span>
+<span>Back</span>
+</button>
+
+<!-- Main Content -->
+<div class="main-content">
+<div class="main-gallery" id="mainGallery">
+<div class="gproj-gallery-wrapper">
+<div class="gproj-videos-grid">
+
+<div class="gproj-video-item">
+<div class="gproj-video-thumbnail">
+<iframe src="https://www.youtube.com/embed/AmxPIua3gFg" allowfullscreen loading="lazy"></iframe>
+</div>
+<div class="gproj-video-info">
+<h3 class="gproj-video-title">8'amities</h3>
+<p class="gproj-video-description">Konten visual fashion kasual yang memperkuat branding dan daya tarik audiens dengan foto dan video dinamis.</p>
+<button class="gproj-project-btn" onclick="showClientDetail('8amities')">View Details</button>
+</div>
+</div>
+
+<div class="gproj-video-item">
+<div class="gproj-video-thumbnail">
+<iframe src="https://www.youtube.com/embed/AKRjRzgrkYY" allowfullscreen loading="lazy"></iframe>
+</div>
+<div class="gproj-video-info">
+<h3 class="gproj-video-title">Cemilan Keto</h3>
+<p class="gproj-video-description">Konten edukatif cemilan sehat keto yang menampilkan produk berkualitas dengan visual menggugah selera.</p>
+<button class="gproj-project-btn" onclick="showClientDetail('cemilanketo')">View Details</button>
+</div>
+</div>
+
+<div class="gproj-video-item">
+<div class="gproj-video-thumbnail">
+<iframe src="https://www.youtube.com/embed/gi5C55wAW3s" allowfullscreen loading="lazy"></iframe>
+</div>
+<div class="gproj-video-info">
+<h3 class="gproj-video-title">Ribsgold</h3>
+<p class="gproj-video-description">Strategi konten unisex fashion yang menyasar pria dan wanita dengan visual modern dan gaya kontemporer.</p>
+<button class="gproj-project-btn" onclick="showClientDetail('ribsgold')">View Details</button>
+</div>
+</div>
+
+<div class="gproj-video-item">
+<div class="gproj-video-thumbnail">
+<iframe src="https://www.youtube.com/embed/C1AuZOVSNHE" allowfullscreen loading="lazy"></iframe>
+</div>
+<div class="gproj-video-info">
+<h3 class="gproj-video-title">Bymanda</h3>
+<p class="gproj-video-description">Strategi media sosial kreatif dengan konten visual yang efektif menyampaikan pesan brand dan engagement.</p>
+<button class="gproj-project-btn" onclick="showClientDetail('bymanda')">View Details</button>
+</div>
+</div>
+
+<div class="gproj-video-item">
+<div class="gproj-video-thumbnail">
+<iframe src="https://www.youtube.com/embed/cdaeSV1kP2k" allowfullscreen loading="lazy"></iframe>
+</div>
+<div class="gproj-video-info">
+<h3 class="gproj-video-title">Seven The Salon</h3>
+<p class="gproj-video-description">Dokumentasi before-after dan layanan salon dengan visual mewah yang selaras dengan branding premium.</p>
+<button class="gproj-project-btn" onclick="showClientDetail('seventhesalon')">View Details</button>
+</div>
+</div>
+
+<div class="gproj-video-item">
+<div class="gproj-video-thumbnail">
+<iframe src="https://www.youtube.com/embed/d50PmePzW98" allowfullscreen loading="lazy"></iframe>
+</div>
+<div class="gproj-video-info">
+<h3 class="gproj-video-title">Tahu Talaga</h3>
+<p class="gproj-video-description">Konten dinamis yang menonjolkan keunggulan produk tahu lokal berkualitas dengan visual menggugah.</p>
+<button class="gproj-project-btn" onclick="showClientDetail('tahutalaga')">View Details</button>
+</div>
+</div>
+
+<div class="gproj-video-item">
+<div class="gproj-video-thumbnail">
+<iframe src="https://www.youtube.com/embed/AVnTfw4XLwI" allowfullscreen loading="lazy"></iframe>
+</div>
+<div class="gproj-video-info">
+<h3 class="gproj-video-title">Nikuya</h3>
+<p class="gproj-video-description">Visual premium untuk brand daging berkualitas dengan fokus wagyu dan salmon dalam kemasan edukatif.</p>
+<button class="gproj-project-btn" onclick="showClientDetail('nikuya')">View Details</button>
+</div>
+</div>
+
+<div class="gproj-video-item">
+<div class="gproj-video-thumbnail">
+<iframe src="https://www.youtube.com/embed/JsNnx8LTC88" allowfullscreen loading="lazy"></iframe>
+</div>
+<div class="gproj-video-info">
+<h3 class="gproj-video-title">Pulse Fitness</h3>
+<p class="gproj-video-description">Konten fitness yang menangkap energi latihan dan semangat hidup sehat dengan visual dinamis motivasi.</p>
+<button class="gproj-project-btn" onclick="showClientDetail('pulsefitness')">View Details</button>
+</div>
+</div>
+
+<div class="gproj-video-item">
+<div class="gproj-video-thumbnail">
+<iframe src="https://www.youtube.com/embed/yuX0l3Zy9EA" allowfullscreen loading="lazy"></iframe>
+</div>
+<div class="gproj-video-info">
+<h3 class="gproj-video-title">Lumity</h3>
+<p class="gproj-video-description">Video estetik untuk studio olahraga yang menampilkan vibes yoga, zumba, dan aerobik dengan energi positif.</p>
+<button class="gproj-project-btn" onclick="showClientDetail('lumitystudio')">View Details</button>
+</div>
+</div>
+
+<div class="gproj-video-item">
+<div class="gproj-video-thumbnail">
+<iframe src="https://www.youtube.com/embed/tJ-JaP61hS4" allowfullscreen loading="lazy"></iframe>
+</div>
+<div class="gproj-video-info">
+<h3 class="gproj-video-title">Skin Ethica</h3>
+<p class="gproj-video-description">Konten edukatif klinik kecantikan yang menampilkan layanan premium dan profesionalitas dengan trust.</p>
+<button class="gproj-project-btn" onclick="showClientDetail('skinethica')">View Details</button>
+</div>
+</div>
+
+<div class="gproj-video-item">
+<div class="gproj-video-thumbnail">
+<iframe src="https://www.youtube.com/embed/bqFvUt1fLnI" allowfullscreen loading="lazy"></iframe>
+</div>
+<div class="gproj-video-info">
+<h3 class="gproj-video-title">Anita Salon</h3>
+<p class="gproj-video-description">Dokumentasi layanan salon dengan storytelling elegan yang membantu audiens memahami keunggulan brand.</p>
+<button class="gproj-project-btn" onclick="showClientDetail('anitasalon')">View Details</button>
+</div>
+</div>
+
+<div class="gproj-video-item">
+<div class="gproj-video-thumbnail">
+<iframe src="https://www.youtube.com/embed/2HYKLLIIwyo" allowfullscreen loading="lazy"></iframe>
+</div>
+<div class="gproj-video-info">
+<h3 class="gproj-video-title">Sambarajo</h3>
+<p class="gproj-video-description">Konten autentik restoran Padang yang menampilkan suasana dan kelezatan masakan khas yang otentik.</p>
+<button class="gproj-project-btn" onclick="showClientDetail('sambarajo')">View Details</button>
+</div>
+</div>
+
+<div class="gproj-video-item">
+<div class="gproj-video-thumbnail">
+<iframe src="https://www.youtube.com/embed/Bc0aF7EmMkY" allowfullscreen loading="lazy"></iframe>
+</div>
+<div class="gproj-video-info">
+<h3 class="gproj-video-title">Peek A Boo</h3>
+<p class="gproj-video-description">Visual dinamis hairstation yang menampilkan layanan styling dengan suasana fun dan stylish klien.</p>
+<button class="gproj-project-btn" onclick="showClientDetail('peekaboo')">View Details</button>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
 <script>
+// Navigation script initialization
 (function(){
 if(window.hNavInit)return;
 window.hNavInit=true;
@@ -467,7 +1006,38 @@ const toggleMenu=()=>{open=!open;h.classList.toggle('active',open);m.classList.t
 const closeMenu=()=>{open=false;h.classList.remove('active');m.classList.remove('show');o.classList.remove('show');document.body.style.overflow=''};
 h.onclick=e=>{e.preventDefault();toggleMenu()};
 o.onclick=closeMenu;
-document.querySelectorAll('.hnavbar-mobile-menu a, .hnavbar-nav-links a').forEach(a=>{a.onclick=e=>{const target=a.getAttribute('href');document.querySelectorAll('.hnavbar-nav-links a, .hnavbar-mobile-menu a').forEach(link=>link.classList.remove('active'));document.querySelectorAll(`a[href="${target}"]`).forEach(link=>link.classList.add('active'));closeMenu();if(target==='#home'){e.preventDefault();setTimeout(()=>window.scrollTo({top:0,behavior:'smooth'}),100)}else if(target.startsWith('#')){e.preventDefault();setTimeout(()=>{const el=document.querySelector(target);if(el)el.scrollIntoView({behavior:'smooth',block:'start'})},100)}}});
+
+// Handle navigation links - differentiate between external and internal links
+document.querySelectorAll('.hnavbar-mobile-menu a, .hnavbar-nav-links a').forEach(a=>{
+a.onclick=e=>{
+const target=a.getAttribute('href');
+const isExternalLink = target.startsWith('https://dynamiccreative.crd.co/');
+const isGalleryLink = target === '#gallery';
+
+// Update active states
+document.querySelectorAll('.hnavbar-nav-links a, .hnavbar-mobile-menu a').forEach(link=>link.classList.remove('active'));
+if (isGalleryLink) {
+  document.querySelectorAll(`a[href="#gallery"]`).forEach(link=>link.classList.add('active'));
+} else {
+  document.querySelectorAll(`a[href="${target}"]`).forEach(link=>link.classList.add('active'));
+}
+
+closeMenu();
+
+if (isGalleryLink) {
+  e.preventDefault();
+  // Stay on current page, scroll to top
+  setTimeout(()=>window.scrollTo({top:0,behavior:'smooth'}),100);
+} else if (!isExternalLink && target.startsWith('#')) {
+  e.preventDefault();
+  setTimeout(()=>{
+    const el=document.querySelector(target);
+    if(el)el.scrollIntoView({behavior:'smooth',block:'start'})
+  },100);
+}
+// For external links, let default behavior happen (navigate to dynamiccreative.crd.co)
+}});
+
 const handleScroll=()=>{if(!tick){requestAnimationFrame(()=>{const y=window.scrollY;n.classList.toggle('scrolled',y>30);if(window.innerWidth<=768){n.classList.toggle('hidden',y>last&&y>120)}last=y;tick=false});tick=true}};
 window.addEventListener('scroll',handleScroll,{passive:true});
 window.addEventListener('resize',()=>{if(open)closeMenu()});
@@ -476,6 +1046,255 @@ const observer=new MutationObserver(()=>{if(!document.body.contains(n)){document
 observer.observe(document.body,{childList:true,subtree:true});
 if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',()=>{setTimeout(()=>{if(!document.body.contains(n)){document.body.appendChild(n);document.body.appendChild(m);document.body.appendChild(o)}},100)})}
 })();
+
+// Gallery functionality
+const clientData = {
+  '8amities': {
+    title: "8'amities",
+    description: "Konten visual fashion kasual yang memperkuat branding dan daya tarik audiens dengan foto dan video dinamis.",
+    videos: [
+      { title: "8'Amities Astro", id: "1eVyUJjRVVBAOSIEDDRUPq-w9SinkjbNq" },
+      { title: "8'Amities Stan", id: "1wvkUBOtxGbA-yKIOx3evA5FRWTclbkEG" },
+      { title: "8'Amities GBK", id: "1oog_2GnLg5Bf7ygQh9LgY5dZPIrVwr-m" }
+    ]
+  },
+  'cemilanketo': {
+    title: "Cemilan Keto",
+    description: "Konten edukatif cemilan sehat keto yang menampilkan produk berkualitas dengan visual menggugah selera.",
+    videos: [
+      { title: "Pizza", id: "1ylrXLPCeESz0uhx2AFLWm1MO2ioz0-q5" },
+      { title: "Jajanan Pasar", id: "1yVkp8z7oTmDw_piImzHLL-8WzUlWuhR5" },
+      { title: "Dimsum", id: "1Yo4mu28jNF7rEBy7LGVR3vyah7UJQpon" },
+      { title: "Olahan Ayam", id: "1O01ZMw55-Ahm7Nl6tmM33OSpgwLZuEhD" }
+    ]
+  },
+  'ribsgold': {
+    title: "Ribsgold",
+    description: "Strategi konten unisex fashion yang menyasar pria dan wanita dengan visual modern dan gaya kontemporer.",
+    videos: [
+      { title: "Kemeja Togs", id: "1Z92xucR5FNXt-Vl0QjfScgBPSKNdu2Bn" },
+      { title: "Bevery Unique", id: "19oKWsTqhWSGkc2DNS13pHqwYqqnnv2d2" },
+      { title: "Kemeja Flanel", id: "10G217ouwOhJyTqpU0kjvWEFgKF0-0cBe" },
+      { title: "Tampil Timless", id: "1ll48B46L1iXRlLG7IkE6o_4rAKYvtNnJ" },
+      { title: "Outfit Sehari Hari", id: "1hY_q2AWmFqWHCI0PiEvzHAne6Eo4L54v" },
+      { title: "Anak Motor", id: "1nJ09BvdcahFq0oZm_wLGPK2qJ7VfmLir" },
+      { title: "Drama Rese", id: "1HnKdnOHXbWXUvRnzba6Q0eTeIIRZ2h3i" },
+      { title: "Kado Buat Ayah", id: "1aElb50aKJoXbg40xYJSU_j2wo2WPZZNr" }
+    ]
+  },
+  'bymanda': {
+    title: "Bymanda",
+    description: "Strategi media sosial kreatif dengan konten visual yang efektif menyampaikan pesan brand dan engagement.",
+    videos: [
+      { title: "Cadar", id: "1d3kCw4Jrut3qRPqSGYQ_ERL87FSc7k-C" },
+      { title: "Gamis I", id: "1WUgGKElKs1oU1Pwne38JGGPn3cMAc4ox" },
+      { title: "Gamis II", id: "1OeCJOINqDVeVdpBgzEOWvYrK9KW6Opr8" },
+      { title: "Mukena", id: "1DD-y6ceziLZ5kVEIF3UvA5f1QbY43Quh" }
+    ]
+  },
+  'seventhesalon': {
+    title: "Seven The Salon",
+    description: "Dokumentasi before-after dan layanan salon dengan visual mewah yang selaras dengan branding premium.",
+    videos: [
+      { title: "Cherry Tamara", id: "1GRtmPwSnrGJ1rA4ePkphhokahHokFFFu" },
+      { title: "Valora Layer", id: "1rkV90uQn1XGR4dU_ldIK2YZG8j-meMKx" },
+      { title: "Olive", id: "1yW26qBP6ky79Br0o1IBbc09eZbDbY8dO" },
+      { title: "Michelle", id: "1ea53Vmmdi0m2ZfYpHSWtIs9BhhsSBCkx" },
+      { title: "Seminar Caogialoc", id: "19MY8-rKVqEO3j09DWpbSxOuU8HuNBftH" },
+      { title: "Seminar Schwarzkopf", id: "1dYqIQySzmMPjqTdUeh85j4990IhiCAIm" }
+    ]
+  },
+  'tahutalaga': {
+    title: "Tahu Talaga",
+    description: "Konten dinamis yang menonjolkan keunggulan produk tahu lokal berkualitas dengan visual menggugah.",
+    videos: [
+      { title: "Natal 2025", id: "11wdneYzb26nnlStriK_yG08CBigvxPAt" },
+      { title: "KBP", id: "1j80VtwyCZsxGEvvqL8_V8Q4LFItEhsTp" },
+      { title: "Kabin", id: "1ZrEYTKqfzsMEcP45cjC7cjejq_jipo9M" },
+      { title: "Cara Penyimpanan Tahu", id: "1VqtINaVYw4KDDSd8eaW1dqjo1TSJ3ZBB" }
+    ]
+  },
+  'nikuya': {
+    title: "Nikuya",
+    description: "Visual premium untuk brand daging berkualitas dengan fokus wagyu dan salmon dalam kemasan edukatif.",
+    videos: [
+      { title: "Salmon Mentah Aman?", id: "1RROsqw_j0M9hUYHykhdS82KcavdZTNiE" },
+      { title: "Meltique", id: "1_bGUWFzwA4Ka0M7IUx4PDONYlMvYCJln" },
+      { title: "Sejiwa Coffee", id: "1fglleglQU5hwnewtPvMYmglmyc8EbE3Y" },
+      { title: "Wheels Coffee", id: "1l8rWJVcwjXJHbGvTBS7ddJXKHVoXat1a" }
+    ]
+  },
+  'pulsefitness': {
+    title: "Pulse Fitness",
+    description: "Konten fitness yang menangkap energi latihan dan semangat hidup sehat dengan visual dinamis motivasi.",
+    videos: [
+      { title: "Campus Championship", id: "1qTeIcVSMHFucDo7lvTn8jxcJTNR7lNj6" },
+      { title: "Opening", id: "1z6TpxW-lEu56Ofw3xxPXEmOz0AiWwqFB" },
+      { title: "Tips Otot Stuk", id: "1DTeTiYxTgS-NnmHsgO31TRa_DQY9TFqW" }
+    ]
+  },
+  'lumitystudio': {
+    title: "Lumity Studio",
+    description: "Video estetik untuk studio olahraga yang menampilkan vibes yoga, zumba, dan aerobik dengan energi positif.",
+    videos: [
+      { title: "Opening", id: "1LXphzlnELQSGiDchoTZwNB52-n6qoD4x" },
+      { title: "Superhouse Lumity", id: "1XDmNJEVMi0SXDZTDOnOGkH-Gwxv9R8KV" },
+      { title: "Trampoline Promo", id: "1tVbWens3-QzuxPCNxZ3bvT9rXA0lprET" },
+      { title: "Trampoline Party", id: "1Px5QORQwYUNcM1CyNMm6t6OlFMUqOlUb" }
+    ]
+  },
+  'skinethica': {
+    title: "Skin Ethica",
+    description: "Konten edukatif klinik kecantikan yang menampilkan layanan premium dan profesionalitas dengan trust.",
+    videos: [
+      { title: "Promo Facial", id: "1A29sbb5uCkUT6DQ6MrOKjiAsEA9a2k3z" },
+      { title: "Gastric Balloon", id: "1vNuHTWF_uTj36wEbCkpjaVTDips_3iDx" }
+    ]
+  },
+  'anitasalon': {
+    title: "Anita Salon",
+    description: "Dokumentasi layanan salon dengan storytelling elegan yang membantu audiens memahami keunggulan brand.",
+    videos: [
+      { title: "Listy Chan Pokemon", id: "1w803KiGsj53k0eCYrplu0Yxtl6bPqIHJ" },
+      { title: "Baba Boom", id: "1JeHkcYMyyO6Q9SQLK63j-esysOt5zbJB" },
+      { title: "Color Grey", id: "1cNfrWvQ0scBWe5TI6wnlAglCaTZacf5E" }
+    ]
+  },
+  'sambarajo': {
+    title: "Sambarajo",
+    description: "Konten autentik restoran Padang yang menampilkan suasana dan kelezatan masakan khas yang otentik.",
+    videos: [
+      { title: "Iga Bakar", id: "1j1pwYc0XvLvDMMSbddCx5cQtQQf0pVT2" },
+      { title: "Koyor Balado", id: "1pXCaJte8bRPmtZ4YebRISTiiBqUtHQkb" },
+      { title: "Sop Buntut Marasok", id: "1jAOqv4mZSURW41S6UIzS5zN0MAF-rWmI" },
+      { title: "Ikan Bilis Baladon", id: "140wEZTbTQPxmaEUklRqkuYU9pSopVwbv" }
+    ]
+  },
+  'peekaboo': {
+    title: "Peek A Boo",
+    description: "Visual dinamis hairstation yang menampilkan layanan styling dengan suasana fun dan stylish klien.",
+    videos: [
+      { title: "Tokyo Wave", id: "1SoHvxfmz33Ce51qTkG3V2MS_Xk_HxCDO" },
+      { title: "Jocellyn", id: "1A-Bo0MECZyEUrl4nsVBBXo1G9da1PXDy" },
+      { title: "Aldi Cacing", id: "15-R4uZF7w0MP5ZRQg1eb6dJ6qk3lK-66" },
+      { title: "Mey Perm", id: "1X2FWve5KYvVJ7uSkJY2_5FBXZXSU00Ng" }
+    ]
+  }
+};
+
+function showClientDetail(clientId) {
+  const mainGallery = document.getElementById('mainGallery');
+  const backButton = document.getElementById('backButton');
+  
+  // Hide main gallery
+  mainGallery.classList.add('hidden');
+  
+  // Show back button
+  backButton.classList.add('visible');
+  
+  const client = clientData[clientId];
+  if (!client) return;
+  
+  let detailPage = document.getElementById(`detail-${clientId}`);
+  if (!detailPage) {
+    detailPage = document.createElement('div');
+    detailPage.className = 'client-detail-page';
+    detailPage.id = `detail-${clientId}`;
+    
+    const videosHTML = client.videos.map(video => `
+      <div class="video-card">
+        <div class="video-wrapper">
+          <iframe src="https://drive.google.com/file/d/${video.id}/preview" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <h3 class="video-title">${video.title}</h3>
+      </div>
+    `).join('');
+    
+    detailPage.innerHTML = `
+      <div class="detail-header">
+        <h1 class="detail-title">${client.title}</h1>
+        <p class="detail-description">${client.description}</p>
+      </div>
+      <div class="videos-grid">
+        ${videosHTML}
+      </div>
+    `;
+    
+    document.querySelector('.main-content').appendChild(detailPage);
+  }
+  
+  // Hide all detail pages
+  document.querySelectorAll('.client-detail-page').forEach(page => {
+    page.classList.remove('active');
+  });
+  
+  // Show current detail page
+  detailPage.classList.add('active');
+  
+  // Scroll to top smoothly
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function showMainGallery() {
+  const mainGallery = document.getElementById('mainGallery');
+  const backButton = document.getElementById('backButton');
+  
+  // Show main gallery
+  mainGallery.classList.remove('hidden');
+  
+  // Hide back button
+  backButton.classList.remove('visible');
+  
+  // Hide all detail pages
+  document.querySelectorAll('.client-detail-page').forEach(page => {
+    page.classList.remove('active');
+  });
+  
+  // Update navigation to show Gallery as active
+  document.querySelectorAll('.hnavbar-nav-links a, .hnavbar-mobile-menu a').forEach(link=>link.classList.remove('active'));
+  document.querySelectorAll(`a[href="#gallery"]`).forEach(link=>link.classList.add('active'));
+  
+  // Scroll to top smoothly
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Add loading state to buttons
+document.addEventListener('DOMContentLoaded', function() {
+  const buttons = document.querySelectorAll('.gproj-project-btn');
+  buttons.forEach(button => {
+    button.addEventListener('click', function() {
+      this.classList.add('loading');
+      setTimeout(() => {
+        this.classList.remove('loading');
+      }, 500);
+    });
+  });
+  
+  // Set Gallery as active on page load
+  document.querySelectorAll('.hnavbar-nav-links a, .hnavbar-mobile-menu a').forEach(link=>link.classList.remove('active'));
+  document.querySelectorAll(`a[href="#gallery"]`).forEach(link=>link.classList.add('active'));
+});
+
+// Simple navigation state management
+let currentView = 'gallery';
+let currentClient = null;
+
+// Enhanced showClientDetail
+const originalShowClientDetail = showClientDetail;
+showClientDetail = function(clientId) {
+  currentView = 'detail';
+  currentClient = clientId;
+  originalShowClientDetail(clientId);
+};
+
+// Enhanced showMainGallery
+const originalShowMainGallery = showMainGallery;
+showMainGallery = function() {
+  currentView = 'gallery';
+  currentClient = null;
+  originalShowMainGallery();
+};
 </script>
+
 </body>
 </html>
