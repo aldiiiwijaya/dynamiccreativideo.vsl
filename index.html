@@ -36,7 +36,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 40px 20px; /* Increased top/bottom padding */
             opacity: 0;
             visibility: hidden;
             overflow-y: auto;
@@ -54,7 +54,7 @@
             border-radius: 16px;
             width: 95vw;
             max-width: 1200px;
-            max-height: 85vh;
+            max-height: 80vh; /* Reduced from 85vh to 80vh */
             position: relative;
             overflow: hidden;
             margin: auto;
@@ -134,7 +134,7 @@
         /* Body */
         .body {
             padding: 0;
-            max-height: calc(85vh - 64px);
+            max-height: calc(80vh - 64px); /* Adjusted based on new popup height */
             overflow-y: auto;
             overflow-x: hidden;
             scrollbar-width: none;
@@ -447,6 +447,21 @@
         }
         
         /* Responsive Design */
+        @media (max-width: 1366px) and (min-width: 1024px) {
+            /* Laptop specific fixes */
+            .popup-overlay {
+                padding: 60px 20px; /* More padding on laptops */
+            }
+            
+            .popup-content {
+                max-height: 75vh; /* Even smaller on laptops */
+            }
+            
+            .body {
+                max-height: calc(75vh - 64px);
+            }
+        }
+        
         @media (max-width: 768px) {
             .popup-overlay { padding: 10px; }
             .popup-content {
@@ -754,12 +769,12 @@
         
         // Utility functions
         const getUrlParam = param => new URLSearchParams(window.location.search).get(param);
-        const $ = id => document.getElementById(id);
-        const $$ = selector => document.querySelectorAll(selector);
+        const getEl = id => document.getElementById(id);
+        const getEls = selector => document.querySelectorAll(selector);
         
         // Gallery functions
         function loadGallery() {
-            const videoGrid = $('videoGrid');
+            const videoGrid = getEl('videoGrid');
             const clients = Object.keys(clientData);
             
             const videosHTML = clients.map((clientId, index) => {
@@ -784,7 +799,7 @@
         }
         
         function showClientDetail(clientId) {
-            const mainGallery = $('mainGallery');
+            const mainGallery = getEl('mainGallery');
             mainGallery.classList.add('hidden');
             
             const client = clientData[clientId];
@@ -794,7 +809,7 @@
             currentClient = clientId;
             currentVideos = client.videos;
             
-            let detailPage = $(`detail-${clientId}`);
+            let detailPage = getEl(`detail-${clientId}`);
             if (!detailPage) {
                 detailPage = document.createElement('div');
                 detailPage.className = 'client-detail-page';
@@ -822,19 +837,19 @@
                 document.querySelector('.body').appendChild(detailPage);
             }
             
-            $$('.client-detail-page').forEach(page => page.classList.remove('active'));
+            getEls('.client-detail-page').forEach(page => page.classList.remove('active'));
             detailPage.classList.add('active');
-            $('popupTitle').textContent = client.title;
+            getEl('popupTitle').textContent = client.title;
         }
         
         function showMainGallery() {
-            $('mainGallery').classList.remove('hidden');
-            $$('.client-detail-page').forEach(page => page.classList.remove('active'));
+            getEl('mainGallery').classList.remove('hidden');
+            getEls('.client-detail-page').forEach(page => page.classList.remove('active'));
             
             currentView = 'gallery';
             currentClient = null;
             currentVideos = [];
-            $('popupTitle').textContent = 'Gallery Project';
+            getEl('popupTitle').textContent = 'Gallery Project';
         }
         
         function handleCloseButton() {
@@ -847,58 +862,58 @@
             
             currentIndex = index;
             const video = currentVideos[index];
-            $('lightboxVideo').src = `https://drive.google.com/file/d/${video.id}/preview`;
-            $('lightbox').classList.add('active');
+            getEl('lightboxVideo').src = `https://drive.google.com/file/d/${video.id}/preview`;
+            getEl('lightbox').classList.add('active');
         }
         
         function closeLightbox() {
-            $('lightbox').classList.remove('active');
-            $('lightboxVideo').src = '';
+            getEl('lightbox').classList.remove('active');
+            getEl('lightboxVideo').src = '';
         }
         
         function nextVideo() {
             if (currentVideos.length === 0) return;
             currentIndex = (currentIndex + 1) % currentVideos.length;
-            $('lightboxVideo').src = `https://drive.google.com/file/d/${currentVideos[currentIndex].id}/preview`;
+            getEl('lightboxVideo').src = `https://drive.google.com/file/d/${currentVideos[currentIndex].id}/preview`;
         }
         
         function prevVideo() {
             if (currentVideos.length === 0) return;
             currentIndex = (currentIndex - 1 + currentVideos.length) % currentVideos.length;
-            $('lightboxVideo').src = `https://drive.google.com/file/d/${currentVideos[currentIndex].id}/preview`;
+            getEl('lightboxVideo').src = `https://drive.google.com/file/d/${currentVideos[currentIndex].id}/preview`;
         }
         
         // Popup functions
         function closePopup() {
-            const overlay = $('popupOverlay');
+            const overlay = getEl('popupOverlay');
             overlay.classList.add('hide');
             overlay.classList.remove('show');
             document.body.classList.remove('popup-open');
             
             setTimeout(() => {
-                $$('iframe').forEach(iframe => iframe.src = '');
+                getEls('iframe').forEach(iframe => iframe.src = '');
                 window.parent !== window ? window.parent.postMessage('closePopup', '*') : window.close();
             }, 400);
         }
         
         function showPopup() {
-            const overlay = $('popupOverlay');
+            const overlay = getEl('popupOverlay');
             overlay.classList.add('show');
             overlay.classList.remove('hide');
             document.body.classList.add('popup-open');
         }
         
         // Event listeners
-        $('popupOverlay').addEventListener('click', e => {
+        getEl('popupOverlay').addEventListener('click', e => {
             if (e.target.id === 'popupOverlay') closePopup();
         });
         
-        $('lightbox').addEventListener('click', e => {
+        getEl('lightbox').addEventListener('click', e => {
             if (e.target.id === 'lightbox') closeLightbox();
         });
         
         document.addEventListener('keydown', e => {
-            if ($('lightbox').classList.contains('active')) {
+            if (getEl('lightbox').classList.contains('active')) {
                 if (e.key === 'Escape') closeLightbox();
                 if (e.key === 'ArrowLeft') prevVideo();
                 if (e.key === 'ArrowRight') nextVideo();
@@ -910,14 +925,14 @@
         // Touch events for swipe navigation
         let touchStartX = 0, touchStartTime = 0;
         
-        $('lightbox').addEventListener('touchstart', e => {
+        getEl('lightbox').addEventListener('touchstart', e => {
             if (e.target.classList.contains('lightbox-video')) {
                 touchStartX = e.changedTouches[0].screenX;
                 touchStartTime = Date.now();
             }
         }, { passive: true });
         
-        $('lightbox').addEventListener('touchend', e => {
+        getEl('lightbox').addEventListener('touchend', e => {
             if (e.target.classList.contains('lightbox-video')) {
                 const touchEndX = e.changedTouches[0].screenX;
                 const touchDuration = Date.now() - touchStartTime;
