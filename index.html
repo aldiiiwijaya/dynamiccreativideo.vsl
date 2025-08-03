@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gallery Project Popup</title>
+    <title>Portfolio Popup</title>
     <style>
         * {
             margin: 0;
@@ -163,258 +164,67 @@
             display: none;
         }
         
-        /* Back Button */
-        .back-btn {
-            background: linear-gradient(50deg, #7A66CC, #7A66CCAA);
-            color: #fff;
-            border: none;
-            padding: 0.6rem 1.2rem;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: none;
-            align-items: center;
-            gap: 0.5rem;
-            margin: 1rem 1.5rem 0;
-        }
-        
-        .back-btn.visible {
-            display: flex;
-        }
-        
-        .back-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(122, 102, 204, 0.3);
-            background: linear-gradient(50deg, #8B77DD, #7A66CC);
-        }
-        
-        .back-icon {
-            font-size: 16px;
-        }
-        
-        /* Main Gallery Styles */
-        .main-gallery {
-            display: block;
-        }
-        
-        .main-gallery.hidden {
-            display: none;
-        }
-        
-        .gproj-gallery-wrapper {
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
             padding: 20px;
             padding-bottom: 20px;
+            flex: none;
+            align-content: start;
+            justify-items: center;
+            width: 100%;
+            box-sizing: border-box;
         }
         
-        .gproj-videos-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        
-        .gproj-video-item {
-            background: #1a1a2e;
-            border: 1px solid rgba(122, 102, 204, 0.2);
+        .photo-item {
+            width: 150px;
+            height: 150px;
             border-radius: 16px;
-            padding: 1.5rem;
+            overflow: hidden;
+            cursor: pointer;
             transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.2);
+            touch-action: manipulation;
             opacity: 0;
             transform: translateY(30px) scale(0.9);
-            animation: videoFadeIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            animation: photoFadeIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
             will-change: transform, box-shadow;
         }
         
-        @keyframes videoFadeIn {
+        @keyframes photoFadeIn {
             to {
                 opacity: 1;
                 transform: translateY(0) scale(1);
             }
         }
         
-        .gproj-video-item:hover {
-            transform: translateY(-8px) scale(1.05);
-            border-color: #7A66CC;
-            box-shadow: 0 25px 50px rgba(122, 102, 204, 0.6), 0 15px 25px rgba(0, 0, 0, 0.3);
-            z-index: 2;
-        }
-        
-        .gproj-video-item:active {
-            transform: translateY(-4px) scale(1.02);
-            transition: all 0.15s ease;
-        }
-        
-        .gproj-video-thumbnail {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 16/9;
-            overflow: hidden;
-            border-radius: 15px;
-            margin-bottom: 1rem;
-            flex-shrink: 0;
-        }
-        
-        .gproj-video-thumbnail iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            will-change: transform;
-        }
-        
-        .gproj-video-item:hover .gproj-video-thumbnail iframe {
-            transform: scale(1.15);
-        }
-        
-        .gproj-video-info {
-            text-align: center;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        
-        .gproj-video-title {
-            font-size: 18px;
-            font-weight: 600;
-            line-height: 1.2;
-            margin-bottom: 0.5rem;
-            color: #fff;
-        }
-        
-        .gproj-video-description {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 14px;
-            font-weight: 300;
-            line-height: 1.3;
-            margin-bottom: 1rem;
-        }
-        
-        .gproj-project-btn {
-            background: linear-gradient(50deg, #7A66CC, #7A66CCAA);
-            color: #fff;
-            border: none;
-            padding: 0.7rem 1.5rem;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            align-self: center;
-        }
-        
-        .gproj-project-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(122, 102, 204, 0.3);
-            background: linear-gradient(50deg, #8B77DD, #7A66CC);
-        }
-        
-        /* Detail Page Styles */
-        .client-detail-page {
-            display: none;
-            padding: 20px;
-        }
-        
-        .client-detail-page.active {
-            display: block;
-            animation: fadeIn 0.5s ease-out;
-        }
-        
-        .detail-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        
-        .detail-title {
-            font-size: 2rem;
-            font-weight: 600;
-            background: linear-gradient(135deg, #7A66CC, #9B8CE8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 1rem;
-        }
-        
-        .detail-description {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 1rem;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-        
-        .videos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 15px;
-            margin-top: 2rem;
-        }
-        
-        .video-card {
-            background: #1a1a2e;
-            border: 1px solid rgba(122, 102, 204, 0.2);
-            border-radius: 16px;
-            padding: 1.5rem;
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            cursor: pointer;
-            opacity: 0;
-            transform: translateY(30px) scale(0.9);
-            animation: videoFadeIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-            will-change: transform, box-shadow;
-        }
-        
-        .video-card:hover {
-            transform: translateY(-8px) scale(1.05);
-            border-color: #7A66CC;
+        .photo-item:hover {
+            transform: scale(1.25) translateY(-12px);
             box-shadow: 0 25px 50px rgba(122, 102, 204, 0.6), 0 15px 25px rgba(0, 0, 0, 0.3);
             z-index: 2;
             filter: brightness(1.1);
         }
         
-        .video-card:active {
-            transform: translateY(-4px) scale(1.02);
+        .photo-item:active {
+            transform: scale(1.1) translateY(-6px);
             transition: all 0.15s ease;
         }
         
-        .video-wrapper {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 16/9;
-            overflow: hidden;
-            border-radius: 15px;
-            margin-bottom: 1rem;
-            background: #000;
-        }
-        
-        .video-wrapper iframe {
+        .photo-item img {
             width: 100%;
             height: 100%;
-            border: none;
+            object-fit: cover;
             transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            loading: lazy;
             will-change: transform;
         }
         
-        .video-card:hover .video-wrapper iframe {
+        .photo-item:hover img {
             transform: scale(1.15);
         }
         
-        .video-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #fff;
-            text-align: center;
-        }
-        
-        /* Lightbox */
         .lightbox {
             position: fixed;
             top: 0;
@@ -449,13 +259,14 @@
             justify-content: center;
         }
         
-        .lightbox-video {
+        .lightbox-img {
             max-width: 100%;
             max-height: 100%;
             width: auto;
             height: auto;
             border-radius: 24px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            object-fit: contain;
         }
         
         .lightbox-close {
@@ -532,33 +343,6 @@
             right: 15px;
         }
         
-        .loading {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 150px;
-            color: #fff;
-            font-size: 16px;
-            grid-column: 1 / -1;
-        }
-        
-        .error {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 150px;
-            color: #ff6b6b;
-            font-size: 14px;
-            text-align: center;
-            padding: 15px;
-            grid-column: 1 / -1;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
         /* Mobile optimizations */
         @media (max-width: 768px) {
             .popup-overlay {
@@ -598,81 +382,22 @@
                 max-height: calc(90vh - 50px);
             }
             
-            .back-btn {
-                margin: 0.8rem 1rem 0;
-                padding: 0.5rem 1rem;
-                font-size: 13px;
-            }
-            
-            .gproj-gallery-wrapper, .client-detail-page {
+            .photo-grid {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+                gap: 8px;
                 padding: 12px;
                 padding-bottom: 12px;
             }
             
-            .gproj-videos-grid {
-                grid-template-columns: 1fr;
-                gap: 8px;
-            }
-            
-            .gproj-video-item {
-                max-width: 400px;
-                margin: 0 auto;
-                padding: 1.2rem;
+            .photo-item {
+                width: 100px;
+                height: 100px;
                 border-radius: 12px;
             }
             
-            .gproj-video-item:hover {
-                transform: translateY(-6px) scale(1.03);
+            .photo-item:hover {
+                transform: scale(1.15) translateY(-6px);
                 box-shadow: 0 20px 40px rgba(122, 102, 204, 0.5), 0 10px 20px rgba(0, 0, 0, 0.2);
-            }
-            
-            .gproj-video-title {
-                font-size: 16px;
-            }
-            
-            .gproj-video-description {
-                font-size: 13px;
-            }
-            
-            .gproj-project-btn {
-                padding: 0.6rem 1.2rem;
-                font-size: 13px;
-            }
-            
-            .detail-title {
-                font-size: 1.8rem;
-            }
-            
-            .detail-description {
-                font-size: 0.95rem;
-            }
-            
-            .videos-grid {
-                grid-template-columns: 1fr;
-                gap: 8px;
-            }
-            
-            .video-card {
-                padding: 1.2rem;
-                border-radius: 12px;
-            }
-            
-            .video-card:hover {
-                transform: translateY(-6px) scale(1.03);
-                box-shadow: 0 20px 40px rgba(122, 102, 204, 0.5), 0 10px 20px rgba(0, 0, 0, 0.2);
-            }
-            
-            .video-title {
-                font-size: 1.1rem;
-            }
-            
-            .lightbox-close {
-                top: 70px;
-                right: 20px;
-                width: 38px;
-                height: 38px;
-                font-size: 18px;
-                padding: 10px;
             }
             
             .nav {
@@ -686,6 +411,15 @@
             
             .next {
                 right: 10px;
+            }
+            
+            .lightbox-close {
+                top: 70px;
+                right: 20px;
+                font-size: 18px;
+                padding: 10px;
+                width: 38px;
+                height: 38px;
             }
             
             .lightbox {
@@ -733,87 +467,22 @@
                 max-height: calc(95vh - 45px);
             }
             
-            .back-btn {
-                margin: 0.5rem 0.8rem 0;
-                padding: 0.4rem 0.8rem;
-                font-size: 12px;
-            }
-            
-            .gproj-gallery-wrapper, .client-detail-page {
+            .photo-grid {
+                grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+                gap: 6px;
                 padding: 10px;
                 padding-bottom: 10px;
             }
             
-            .gproj-videos-grid {
-                grid-template-columns: 1fr;
-                gap: 6px;
-            }
-            
-            .gproj-video-item {
-                padding: 1rem;
+            .photo-item {
+                width: 80px;
+                height: 80px;
                 border-radius: 10px;
             }
             
-            .gproj-video-item:hover {
-                transform: translateY(-4px) scale(1.02);
+            .photo-item:hover {
+                transform: scale(1.1) translateY(-4px);
                 box-shadow: 0 15px 30px rgba(122, 102, 204, 0.4), 0 8px 15px rgba(0, 0, 0, 0.2);
-            }
-            
-            .gproj-video-thumbnail {
-                border-radius: 12px;
-            }
-            
-            .gproj-video-title {
-                font-size: 15px;
-            }
-            
-            .gproj-video-description {
-                font-size: 12px;
-            }
-            
-            .gproj-project-btn {
-                padding: 0.5rem 1rem;
-                font-size: 12px;
-                border-radius: 15px;
-            }
-            
-            .detail-title {
-                font-size: 1.6rem;
-            }
-            
-            .detail-description {
-                font-size: 0.9rem;
-            }
-            
-            .videos-grid {
-                gap: 6px;
-            }
-            
-            .video-card {
-                padding: 1rem;
-                border-radius: 10px;
-            }
-            
-            .video-card:hover {
-                transform: translateY(-4px) scale(1.02);
-                box-shadow: 0 15px 30px rgba(122, 102, 204, 0.4), 0 8px 15px rgba(0, 0, 0, 0.2);
-            }
-            
-            .video-wrapper {
-                border-radius: 12px;
-            }
-            
-            .video-title {
-                font-size: 1rem;
-            }
-            
-            .lightbox-close {
-                top: 60px;
-                right: 15px;
-                width: 32px;
-                height: 32px;
-                font-size: 16px;
-                padding: 8px;
             }
             
             .nav {
@@ -829,6 +498,15 @@
                 right: 8px;
             }
             
+            .lightbox-close {
+                top: 60px;
+                right: 15px;
+                font-size: 16px;
+                padding: 8px;
+                width: 32px;
+                height: 32px;
+            }
+            
             .lightbox {
                 padding: 10px;
             }
@@ -840,14 +518,15 @@
         }
         
         @media (max-width: 360px) {
-            .gproj-videos-grid {
-                grid-template-columns: 1fr;
+            .photo-grid {
+                grid-template-columns: repeat(3, 1fr);
                 gap: 5px;
                 padding: 8px;
             }
             
-            .gproj-video-item {
-                padding: 0.8rem;
+            .photo-item {
+                width: 70px;
+                height: 70px;
             }
             
             .title {
@@ -859,6 +538,28 @@
                 height: 30px;
                 font-size: 16px;
             }
+        }
+        
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 150px;
+            color: #fff;
+            font-size: 16px;
+            grid-column: 1 / -1;
+        }
+        
+        .error {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 150px;
+            color: #ff6b6b;
+            font-size: 14px;
+            text-align: center;
+            padding: 15px;
+            grid-column: 1 / -1;
         }
         
         @supports (padding: max(0px)) {
@@ -876,217 +577,211 @@
     <div class="popup-overlay" id="popupOverlay">
         <div class="popup-content">
             <div class="header">
-                <h2 class="title" id="popupTitle">Gallery Project</h2>
+                <h2 class="title" id="popupTitle">Portfolio</h2>
                 <button class="close" onclick="closePopup()" type="button">&times;</button>
             </div>
             <div class="body">
-                <!-- Back Button -->
-                <button class="back-btn" onclick="showMainGallery()" id="backButton">
-                    <span class="back-icon">←</span>
-                    <span>Back</span>
-                </button>
-                
-                <!-- Main Gallery -->
-                <div class="main-gallery" id="mainGallery">
-                    <div class="gproj-gallery-wrapper">
-                        <div class="gproj-videos-grid" id="videoGrid">
-                            <div class="loading">Loading videos...</div>
-                        </div>
-                    </div>
+                <div class="photo-grid" id="photoGrid">
+                    <div class="loading">Loading photos...</div>
                 </div>
-                
-                <!-- Detail Pages will be inserted here -->
             </div>
         </div>
     </div>
     
-    <!-- Lightbox for fullscreen video viewing -->
     <div class="lightbox" id="lightbox">
         <div class="lightbox-content">
-            <iframe class="lightbox-video" id="lightboxVideo" allowfullscreen></iframe>
+            <img class="lightbox-img" id="lightboxImg" alt="Photo">
             <button class="lightbox-close" onclick="closeLightbox()" type="button">&times;</button>
-            <button class="nav prev" onclick="prevVideo()" type="button">&lt;</button>
-            <button class="nav next" onclick="nextVideo()" type="button">&gt;</button>
+            <button class="nav prev" onclick="prevPhoto()" type="button">&lt;</button>
+            <button class="nav next" onclick="nextPhoto()" type="button">&gt;</button>
         </div>
     </div>
 
     <script>
-        // Client data
-        const clientData = {
-            '8amities': {
-                title: "8'amities",
-                description: "Konten visual fashion kasual yang memperkuat branding dan daya tarik audiens dengan foto dan video dinamis.",
-                videos: [
-                    { title: "8'Amities Astro", id: "1eVyUJjRVVBAOSIEDDRUPq-w9SinkjbNq" },
-                    { title: "8'Amities Stan", id: "1wvkUBOtxGbA-yKIOx3evA5FRWTclbkEG" },
-                    { title: "8'Amities GBK", id: "1oog_2GnLg5Bf7ygQh9LgY5dZPIrVwr-m" }
+        const baseUrl = 'https://raw.githubusercontent.com/aldiiiwijaya/aldiiiwijaya_/main/Foto/Foto%20';
+        
+        const portfolioData = {
+            'amities': {
+                title: "8'Amities Fashion Photography",
+                path: "8'Amities/",
+                photos: [
+                    'Astro%20(1).webp', 'Astro%20(2).webp', 'Astro%20(3).webp', 'Astro%20(4).webp', 'Astro%20(5).webp',
+                    'GBK%20(1).webp', 'GBK%20(2).webp', 'GBK%20(3).webp', 'GBK%20(4).webp', 'GBK%20(5).webp',
+                    'Stan%20(1).webp', 'Stan%20(2).webp', 'Stan%20(3).webp', 'Stan%20(4).webp', 'Stan%20(5).webp'
                 ]
             },
-            'cemilanketo': {
-                title: "Cemilan Keto",
-                description: "Konten edukatif cemilan sehat keto yang menampilkan produk berkualitas dengan visual menggugah selera.",
-                videos: [
-                    { title: "Pizza", id: "1ylrXLPCeESz0uhx2AFLWm1MO2ioz0-q5" },
-                    { title: "Jajanan Pasar", id: "1yVkp8z7oTmDw_piImzHLL-8WzUlWuhR5" },
-                    { title: "Dimsum", id: "1Yo4mu28jNF7rEBy7LGVR3vyah7UJQpon" },
-                    { title: "Olahan Ayam", id: "1O01ZMw55-Ahm7Nl6tmM33OSpgwLZuEhD" }
-                ]
+            'accent': {
+                title: 'Accent Ambios Product Photography',
+                path: 'Accent%20Ambios/',
+                photos: Array.from({length: 10}, (v, k) => `Accent%20Ambios%20(${k + 1}).webp`)
+            },
+            'ribsgold': {
+                title: 'Ribsgold Product Photography',
+                path: 'Ribsgold/',
+                photos: Array.from({length: 10}, (v, k) => `Ribsgold%20(${k + 1}).webp`)
+            },
+            'kopi': {
+                title: 'Kopi Bituka Cafe Photography',
+                path: 'Kopi%20Bituka/',
+                photos: Array.from({length: 10}, (v, k) => `Kopi%20Bituka%20(${k + 1}).webp`)
+            },
+            'bride': {
+                title: 'White Bride Wedding Collection',
+                path: 'White%20Bride/',
+                photos: Array.from({length: 10}, (v, k) => `White%20Bride%20(${k + 1}).webp`)
             }
         };
         
-        let currentVideos = [];
+        let currentPhotos = [];
         let currentIndex = 0;
-        let currentView = 'gallery';
-        let currentClient = null;
+        let imageCache = new Map();
         
-        // Get client parameter from URL
+        function preloadImage(src) {
+            return new Promise((resolve, reject) => {
+                if (imageCache.has(src)) {
+                    resolve(imageCache.get(src));
+                    return;
+                }
+                
+                const img = new Image();
+                img.onload = () => {
+                    imageCache.set(src, img);
+                    resolve(img);
+                };
+                img.onerror = reject;
+                img.src = src;
+            });
+        }
+        
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    preloadImage(img.dataset.src).then(() => {
+                        img.src = img.dataset.src;
+                        img.classList.add('loaded');
+                    }).catch(() => {
+                        img.parentElement.style.display = 'none';
+                    });
+                    observer.unobserve(img);
+                }
+            });
+        });
+        
         function getUrlParam(param) {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get(param);
         }
         
-        // Load main gallery
-        function loadGallery() {
-            const videoGrid = document.getElementById('videoGrid');
-            const clients = Object.keys(clientData);
+        function loadPortfolio() {
+            const client = getUrlParam('client') || 'amities';
+            const data = portfolioData[client];
             
-            const videosHTML = clients.map((clientId, index) => {
-                const client = clientData[clientId];
-                const mainVideo = client.videos[0]; // Use first video as preview
-                
-                return `
-                    <div class="gproj-video-item" style="animation-delay: ${index * 0.08}s;">
-                        <div class="gproj-video-thumbnail">
-                            <iframe src="https://drive.google.com/file/d/${mainVideo.id}/preview" allowfullscreen loading="lazy"></iframe>
-                        </div>
-                        <div class="gproj-video-info">
-                            <h3 class="gproj-video-title">${client.title}</h3>
-                            <p class="gproj-video-description">${client.description}</p>
-                            <button class="gproj-project-btn" onclick="showClientDetail('${clientId}')">View Details</button>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-            
-            videoGrid.innerHTML = videosHTML;
-        }
-        
-        // Show client detail page
-        function showClientDetail(clientId) {
-            const mainGallery = document.getElementById('mainGallery');
-            const backButton = document.getElementById('backButton');
-            
-            // Hide main gallery
-            mainGallery.classList.add('hidden');
-            
-            // Show back button
-            backButton.classList.add('visible');
-            
-            const client = clientData[clientId];
-            if (!client) return;
-            
-            // Update current state
-            currentView = 'detail';
-            currentClient = clientId;
-            currentVideos = client.videos;
-            
-            let detailPage = document.getElementById(`detail-${clientId}`);
-            if (!detailPage) {
-                detailPage = document.createElement('div');
-                detailPage.className = 'client-detail-page';
-                detailPage.id = `detail-${clientId}`;
-                
-                const videosHTML = client.videos.map((video, index) => `
-                    <div class="video-card" onclick="openLightbox(${index})" style="animation-delay: ${index * 0.08}s;">
-                        <div class="video-wrapper">
-                            <iframe src="https://drive.google.com/file/d/${video.id}/preview" allowfullscreen loading="lazy"></iframe>
-                        </div>
-                        <h3 class="video-title">${video.title}</h3>
-                    </div>
-                `).join('');
-                
-                detailPage.innerHTML = `
-                    <div class="detail-header">
-                        <h1 class="detail-title">${client.title}</h1>
-                        <p class="detail-description">${client.description}</p>
-                    </div>
-                    <div class="videos-grid">
-                        ${videosHTML}
-                    </div>
-                `;
-                
-                document.querySelector('.body').appendChild(detailPage);
+            if (!data) {
+                showError('Portfolio tidak ditemukan');
+                return;
             }
             
-            // Hide all detail pages
-            document.querySelectorAll('.client-detail-page').forEach(page => {
-                page.classList.remove('active');
+            document.getElementById('popupTitle').textContent = data.title;
+            currentPhotos = data.photos.map(photo => baseUrl + data.path + photo);
+            
+            renderPhotos();
+            
+            const preloadCount = Math.min(6, currentPhotos.length);
+            Promise.all(
+                currentPhotos.slice(0, preloadCount).map(preloadImage)
+            ).then(() => {
+                console.log('First batch preloaded');
             });
-            
-            // Show current detail page
-            detailPage.classList.add('active');
-            
-            // Update title
-            document.getElementById('popupTitle').textContent = client.title;
         }
         
-        // Show main gallery
-        function showMainGallery() {
-            const mainGallery = document.getElementById('mainGallery');
-            const backButton = document.getElementById('backButton');
+        function renderPhotos() {
+            const grid = document.getElementById('photoGrid');
+            grid.innerHTML = '';
             
-            // Show main gallery
-            mainGallery.classList.remove('hidden');
-            
-            // Hide back button
-            backButton.classList.remove('visible');
-            
-            // Hide all detail pages
-            document.querySelectorAll('.client-detail-page').forEach(page => {
-                page.classList.remove('active');
+            currentPhotos.forEach((photoUrl, index) => {
+                const photoItem = document.createElement('div');
+                photoItem.className = 'photo-item';
+                photoItem.style.animationDelay = `${index * 0.08}s`;
+                photoItem.onclick = () => openLightbox(index);
+                
+                const img = document.createElement('img');
+                img.alt = `Photo ${index + 1}`;
+                img.loading = 'lazy';
+                img.classList.add('lazy');
+                
+                if (index < 6) {
+                    img.src = photoUrl;
+                } else {
+                    img.dataset.src = photoUrl;
+                    img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"%3E%3C/svg%3E';
+                    imageObserver.observe(img);
+                }
+                
+                img.onerror = function() {
+                    this.parentElement.style.display = 'none';
+                };
+                
+                photoItem.appendChild(img);
+                grid.appendChild(photoItem);
             });
-            
-            // Update state
-            currentView = 'gallery';
-            currentClient = null;
-            currentVideos = [];
-            
-            // Update title
-            document.getElementById('popupTitle').textContent = 'Gallery Project';
         }
         
-        // Lightbox functions
+        function showError(message) {
+            const grid = document.getElementById('photoGrid');
+            grid.innerHTML = `<div class="error">${message}</div>`;
+        }
+        
         function openLightbox(index) {
-            if (currentVideos.length === 0) return;
-            
             currentIndex = index;
-            const video = currentVideos[index];
-            const lightboxVideo = document.getElementById('lightboxVideo');
+            const img = document.getElementById('lightboxImg');
             
-            lightboxVideo.src = `https://drive.google.com/file/d/${video.id}/preview`;
-            document.getElementById('lightbox').classList.add('active');
+            img.style.opacity = '0.5';
+            
+            preloadImage(currentPhotos[index]).then(() => {
+                img.src = currentPhotos[index];
+                img.style.opacity = '1';
+                document.getElementById('lightbox').classList.add('active');
+                
+                const nextIndex = (index + 1) % currentPhotos.length;
+                const prevIndex = (index - 1 + currentPhotos.length) % currentPhotos.length;
+                preloadImage(currentPhotos[nextIndex]);
+                preloadImage(currentPhotos[prevIndex]);
+            });
         }
         
         function closeLightbox() {
             document.getElementById('lightbox').classList.remove('active');
-            document.getElementById('lightboxVideo').src = '';
         }
         
-        function nextVideo() {
-            if (currentVideos.length === 0) return;
-            currentIndex = (currentIndex + 1) % currentVideos.length;
-            const video = currentVideos[currentIndex];
-            document.getElementById('lightboxVideo').src = `https://drive.google.com/file/d/${video.id}/preview`;
+        function nextPhoto() {
+            currentIndex = (currentIndex + 1) % currentPhotos.length;
+            const img = document.getElementById('lightboxImg');
+            img.style.opacity = '0.5';
+            
+            preloadImage(currentPhotos[currentIndex]).then(() => {
+                img.src = currentPhotos[currentIndex];
+                img.style.opacity = '1';
+                
+                const nextIndex = (currentIndex + 1) % currentPhotos.length;
+                preloadImage(currentPhotos[nextIndex]);
+            });
         }
         
-        function prevVideo() {
-            if (currentVideos.length === 0) return;
-            currentIndex = (currentIndex - 1 + currentVideos.length) % currentVideos.length;
-            const video = currentVideos[currentIndex];
-            document.getElementById('lightboxVideo').src = `https://drive.google.com/file/d/${video.id}/preview`;
+        function prevPhoto() {
+            currentIndex = (currentIndex - 1 + currentPhotos.length) % currentPhotos.length;
+            const img = document.getElementById('lightboxImg');
+            img.style.opacity = '0.5';
+            
+            preloadImage(currentPhotos[currentIndex]).then(() => {
+                img.src = currentPhotos[currentIndex];
+                img.style.opacity = '1';
+                
+                const prevIndex = (currentIndex - 1 + currentPhotos.length) % currentPhotos.length;
+                preloadImage(currentPhotos[prevIndex]);
+            });
         }
         
-        // Popup functions
         function closePopup() {
             const overlay = document.getElementById('popupOverlay');
             overlay.classList.add('hide');
@@ -1107,7 +802,6 @@
             overlay.classList.remove('hide');
         }
         
-        // Event listeners
         document.getElementById('popupOverlay').addEventListener('click', function(e) {
             if (e.target.id === 'popupOverlay') {
                 closePopup();
@@ -1123,31 +817,26 @@
         document.addEventListener('keydown', function(e) {
             if (document.getElementById('lightbox').classList.contains('active')) {
                 if (e.key === 'Escape') closeLightbox();
-                if (e.key === 'ArrowLeft') prevVideo();
-                if (e.key === 'ArrowRight') nextVideo();
+                if (e.key === 'ArrowLeft') prevPhoto();
+                if (e.key === 'ArrowRight') nextPhoto();
             } else if (e.key === 'Escape') {
-                if (currentView === 'detail') {
-                    showMainGallery();
-                } else {
-                    closePopup();
-                }
+                closePopup();
             }
         });
         
-        // Touch events for swipe navigation in lightbox
         let touchStartX = 0;
         let touchEndX = 0;
         let touchStartTime = 0;
         
         document.getElementById('lightbox').addEventListener('touchstart', function(e) {
-            if (e.target.classList.contains('lightbox-video')) {
+            if (e.target.id === 'lightboxImg') {
                 touchStartX = e.changedTouches[0].screenX;
                 touchStartTime = Date.now();
             }
         }, { passive: true });
         
         document.getElementById('lightbox').addEventListener('touchend', function(e) {
-            if (e.target.classList.contains('lightbox-video')) {
+            if (e.target.id === 'lightboxImg') {
                 touchEndX = e.changedTouches[0].screenX;
                 const touchDuration = Date.now() - touchStartTime;
                 
@@ -1159,14 +848,13 @@
         
         function handleSwipe() {
             if (touchEndX < touchStartX - 50) {
-                nextVideo();
+                nextPhoto();
             }
             if (touchEndX > touchStartX + 50) {
-                prevVideo();
+                prevPhoto();
             }
         }
         
-        // Scroll optimization
         let ticking = false;
         function updateScrollPosition() {
             ticking = false;
@@ -1179,53 +867,31 @@
             }
         }, { passive: true });
         
-        // Handle messages from parent window
-        window.addEventListener('message', function(event) {
-            if (event.data && event.data.action === 'loadGallery') {
-                const client = event.data.client;
-                if (client && clientData[client]) {
-                    showClientDetail(client);
-                } else {
-                    showMainGallery();
-                }
-                showPopup();
-            }
-        });
-        
-        // Initialize on load
         window.addEventListener('load', function() {
-            loadGallery();
-            
-            // Check URL parameter for direct client access
-            const client = getUrlParam('client');
-            if (client && clientData[client]) {
-                showClientDetail(client);
-            }
-            
+            loadPortfolio();
             setTimeout(showPopup, 100);
         });
         
-        // Performance monitoring
+        window.addEventListener('message', function(event) {
+            if (event.data && event.data.action === 'loadPortfolio') {
+                const client = event.data.client;
+                if (portfolioData[client]) {
+                    const data = portfolioData[client];
+                    document.getElementById('popupTitle').textContent = data.title;
+                    currentPhotos = data.photos.map(photo => baseUrl + data.path + photo);
+                    renderPhotos();
+                }
+            }
+        });
+        
         if ('performance' in window) {
             window.addEventListener('load', function() {
                 setTimeout(function() {
                     const perfData = performance.getEntriesByType('navigation')[0];
-                    console.log('Gallery popup load time:', perfData.loadEventEnd - perfData.fetchStart, 'ms');
+                    console.log('Popup load time:', perfData.loadEventEnd - perfData.fetchStart, 'ms');
                 }, 0);
             });
         }
-        
-        // Add loading state to buttons
-        document.addEventListener('DOMContentLoaded', function() {
-            document.addEventListener('click', function(e) {
-                if (e.target.classList.contains('gproj-project-btn')) {
-                    e.target.classList.add('loading');
-                    setTimeout(() => {
-                        e.target.classList.remove('loading');
-                    }, 500);
-                }
-            });
-        });
     </script>
 </body>
 </html>
