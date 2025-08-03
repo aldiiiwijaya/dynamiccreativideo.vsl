@@ -64,9 +64,9 @@
             border-radius: 16px;
             width: 90vw;
             height: auto;
-            max-width: 1200px;
-            max-height: 80vh;
-            min-height: 400px;
+            max-width: 900px;
+            max-height: 75vh;
+            min-height: 300px;
             position: relative;
             overflow: hidden;
             margin: auto;
@@ -149,7 +149,7 @@
         .body {
             padding: 0;
             height: auto;
-            max-height: calc(80vh - 60px);
+            max-height: calc(75vh - 60px);
             overflow-y: auto;
             overflow-x: hidden;
             -webkit-overflow-scrolling: touch;
@@ -204,13 +204,14 @@
         }
         
         .gproj-gallery-wrapper {
-            padding: 2rem 20px;
+            padding: 20px;
+            padding-bottom: 20px;
         }
         
         .gproj-videos-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
+            gap: 15px;
             max-width: 1000px;
             margin: 0 auto;
         }
@@ -218,20 +219,37 @@
         .gproj-video-item {
             background: #1a1a2e;
             border: 1px solid rgba(122, 102, 204, 0.2);
-            border-radius: 20px;
+            border-radius: 16px;
             padding: 1.5rem;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateY(30px) scale(0.9);
+            animation: videoFadeIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            will-change: transform, box-shadow;
+        }
+        
+        @keyframes videoFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
         
         .gproj-video-item:hover {
-            transform: translateY(-8px);
+            transform: translateY(-8px) scale(1.05);
             border-color: #7A66CC;
-            box-shadow: 0 25px 50px rgba(122, 102, 204, 0.25);
+            box-shadow: 0 25px 50px rgba(122, 102, 204, 0.6), 0 15px 25px rgba(0, 0, 0, 0.3);
+            z-index: 2;
+        }
+        
+        .gproj-video-item:active {
+            transform: translateY(-4px) scale(1.02);
+            transition: all 0.15s ease;
         }
         
         .gproj-video-thumbnail {
@@ -248,7 +266,12 @@
             width: 100%;
             height: 100%;
             border: none;
-            transition: transform 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            will-change: transform;
+        }
+        
+        .gproj-video-item:hover .gproj-video-thumbnail iframe {
+            transform: scale(1.15);
         }
         
         .gproj-video-info {
@@ -297,7 +320,7 @@
         /* Detail Page Styles */
         .client-detail-page {
             display: none;
-            padding: 2rem 20px;
+            padding: 20px;
         }
         
         .client-detail-page.active {
@@ -330,25 +353,36 @@
         
         .videos-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
             margin-top: 2rem;
         }
         
         .video-card {
             background: #1a1a2e;
             border: 1px solid rgba(122, 102, 204, 0.2);
-            border-radius: 20px;
+            border-radius: 16px;
             padding: 1.5rem;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             cursor: pointer;
+            opacity: 0;
+            transform: translateY(30px) scale(0.9);
+            animation: videoFadeIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            will-change: transform, box-shadow;
         }
         
         .video-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px) scale(1.05);
             border-color: #7A66CC;
-            box-shadow: 0 20px 40px rgba(122, 102, 204, 0.2);
+            box-shadow: 0 25px 50px rgba(122, 102, 204, 0.6), 0 15px 25px rgba(0, 0, 0, 0.3);
+            z-index: 2;
+            filter: brightness(1.1);
+        }
+        
+        .video-card:active {
+            transform: translateY(-4px) scale(1.02);
+            transition: all 0.15s ease;
         }
         
         .video-wrapper {
@@ -365,6 +399,12 @@
             width: 100%;
             height: 100%;
             border: none;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            will-change: transform;
+        }
+        
+        .video-card:hover .video-wrapper iframe {
+            transform: scale(1.15);
         }
         
         .video-title {
@@ -381,7 +421,7 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             z-index: 10000;
@@ -402,24 +442,25 @@
         
         .lightbox-content {
             position: relative;
-            width: 100%;
-            max-width: 1920px;
-            aspect-ratio: 16/9;
+            max-width: 35vw;
+            max-height: 45vh;
             display: flex;
             align-items: center;
             justify-content: center;
         }
         
         .lightbox-video {
-            width: 100%;
-            height: 100%;
-            border-radius: 12px;
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            border-radius: 24px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
         }
         
         .lightbox-close {
             position: fixed;
-            top: 30px;
+            top: 80px;
             right: 30px;
             background: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(10px);
@@ -495,7 +536,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 200px;
+            height: 150px;
             color: #fff;
             font-size: 16px;
             grid-column: 1 / -1;
@@ -505,7 +546,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 200px;
+            height: 150px;
             color: #ff6b6b;
             font-size: 14px;
             text-align: center;
@@ -522,12 +563,18 @@
         @media (max-width: 768px) {
             .popup-overlay {
                 padding: 10px;
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
             }
             
             .popup-content {
-                width: 95vw;
+                width: 85vw;
+                height: auto;
+                max-width: none;
                 max-height: 90vh;
                 border-radius: 12px;
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
             }
             
             .header {
@@ -543,9 +590,11 @@
                 width: 36px;
                 height: 36px;
                 font-size: 20px;
+                padding: 6px;
             }
             
             .body {
+                height: auto;
                 max-height: calc(90vh - 50px);
             }
             
@@ -556,18 +605,25 @@
             }
             
             .gproj-gallery-wrapper, .client-detail-page {
-                padding: 1.5rem 15px;
+                padding: 12px;
+                padding-bottom: 12px;
             }
             
             .gproj-videos-grid {
                 grid-template-columns: 1fr;
-                gap: 1.5rem;
+                gap: 8px;
             }
             
             .gproj-video-item {
                 max-width: 400px;
                 margin: 0 auto;
                 padding: 1.2rem;
+                border-radius: 12px;
+            }
+            
+            .gproj-video-item:hover {
+                transform: translateY(-6px) scale(1.03);
+                box-shadow: 0 20px 40px rgba(122, 102, 204, 0.5), 0 10px 20px rgba(0, 0, 0, 0.2);
             }
             
             .gproj-video-title {
@@ -593,11 +649,17 @@
             
             .videos-grid {
                 grid-template-columns: 1fr;
-                gap: 1.5rem;
+                gap: 8px;
             }
             
             .video-card {
                 padding: 1.2rem;
+                border-radius: 12px;
+            }
+            
+            .video-card:hover {
+                transform: translateY(-6px) scale(1.03);
+                box-shadow: 0 20px 40px rgba(122, 102, 204, 0.5), 0 10px 20px rgba(0, 0, 0, 0.2);
             }
             
             .video-title {
@@ -605,11 +667,12 @@
             }
             
             .lightbox-close {
-                top: 20px;
+                top: 70px;
                 right: 20px;
                 width: 38px;
                 height: 38px;
                 font-size: 18px;
+                padding: 10px;
             }
             
             .nav {
@@ -624,14 +687,29 @@
             .next {
                 right: 10px;
             }
+            
+            .lightbox {
+                padding: 15px;
+                backdrop-filter: blur(6px);
+                -webkit-backdrop-filter: blur(6px);
+            }
+            
+            .lightbox-content {
+                max-width: 70vw;
+                max-height: 50vh;
+            }
         }
         
         @media (max-width: 480px) {
+            .popup-overlay {
+                padding: 8px;
+            }
+            
             .popup-content {
-                width: 100vw;
-                height: 100vh;
-                max-height: 100vh;
-                border-radius: 0;
+                width: 90vw;
+                height: auto;
+                max-height: 95vh;
+                border-radius: 10px;
             }
             
             .header {
@@ -647,10 +725,12 @@
                 width: 32px;
                 height: 32px;
                 font-size: 18px;
+                padding: 4px;
             }
             
             .body {
-                max-height: calc(100vh - 45px);
+                height: auto;
+                max-height: calc(95vh - 45px);
             }
             
             .back-btn {
@@ -660,12 +740,23 @@
             }
             
             .gproj-gallery-wrapper, .client-detail-page {
-                padding: 1rem 10px;
+                padding: 10px;
+                padding-bottom: 10px;
+            }
+            
+            .gproj-videos-grid {
+                grid-template-columns: 1fr;
+                gap: 6px;
             }
             
             .gproj-video-item {
                 padding: 1rem;
-                border-radius: 15px;
+                border-radius: 10px;
+            }
+            
+            .gproj-video-item:hover {
+                transform: translateY(-4px) scale(1.02);
+                box-shadow: 0 15px 30px rgba(122, 102, 204, 0.4), 0 8px 15px rgba(0, 0, 0, 0.2);
             }
             
             .gproj-video-thumbnail {
@@ -694,9 +785,18 @@
                 font-size: 0.9rem;
             }
             
+            .videos-grid {
+                gap: 6px;
+            }
+            
             .video-card {
                 padding: 1rem;
-                border-radius: 15px;
+                border-radius: 10px;
+            }
+            
+            .video-card:hover {
+                transform: translateY(-4px) scale(1.02);
+                box-shadow: 0 15px 30px rgba(122, 102, 204, 0.4), 0 8px 15px rgba(0, 0, 0, 0.2);
             }
             
             .video-wrapper {
@@ -708,11 +808,12 @@
             }
             
             .lightbox-close {
-                top: 15px;
+                top: 60px;
                 right: 15px;
                 width: 32px;
                 height: 32px;
                 font-size: 16px;
+                padding: 8px;
             }
             
             .nav {
@@ -726,6 +827,47 @@
             
             .next {
                 right: 8px;
+            }
+            
+            .lightbox {
+                padding: 10px;
+            }
+            
+            .lightbox-content {
+                max-width: 80vw;
+                max-height: 55vh;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .gproj-videos-grid {
+                grid-template-columns: 1fr;
+                gap: 5px;
+                padding: 8px;
+            }
+            
+            .gproj-video-item {
+                padding: 0.8rem;
+            }
+            
+            .title {
+                font-size: 13px;
+            }
+            
+            .close {
+                width: 30px;
+                height: 30px;
+                font-size: 16px;
+            }
+        }
+        
+        @supports (padding: max(0px)) {
+            .header {
+                padding-top: max(12px, env(safe-area-inset-top));
+            }
+            
+            .body {
+                padding-bottom: max(0px, env(safe-area-inset-bottom));
             }
         }
     </style>
@@ -789,129 +931,6 @@
                     { title: "Dimsum", id: "1Yo4mu28jNF7rEBy7LGVR3vyah7UJQpon" },
                     { title: "Olahan Ayam", id: "1O01ZMw55-Ahm7Nl6tmM33OSpgwLZuEhD" }
                 ]
-            },
-            'ribsgold': {
-                title: "Ribsgold",
-                description: "Strategi konten unisex fashion yang menyasar pria dan wanita dengan visual modern dan gaya kontemporer.",
-                mainVideo: "gi5C55wAW3s",
-                videos: [
-                    { title: "Kemeja Togs", id: "1Z92xucR5FNXt-Vl0QjfScgBPSKNdu2Bn" },
-                    { title: "Bevery Unique", id: "19oKWsTqhWSGkc2DNS13pHqwYqqnnv2d2" },
-                    { title: "Kemeja Flanel", id: "10G217ouwOhJyTqpU0kjvWEFgKF0-0cBe" },
-                    { title: "Tampil Timless", id: "1ll48B46L1iXRlLG7IkE6o_4rAKYvtNnJ" },
-                    { title: "Outfit Sehari Hari", id: "1hY_q2AWmFqWHCI0PiEvzHAne6Eo4L54v" },
-                    { title: "Anak Motor", id: "1nJ09BvdcahFq0oZm_wLGPK2qJ7VfmLir" },
-                    { title: "Drama Rese", id: "1HnKdnOHXbWXUvRnzba6Q0eTeIIRZ2h3i" },
-                    { title: "Kado Buat Ayah", id: "1aElb50aKJoXbg40xYJSU_j2wo2WPZZNr" }
-                ]
-            },
-            'bymanda': {
-                title: "Bymanda",
-                description: "Strategi media sosial kreatif dengan konten visual yang efektif menyampaikan pesan brand dan engagement.",
-                mainVideo: "C1AuZOVSNHE",
-                videos: [
-                    { title: "Cadar", id: "1d3kCw4Jrut3qRPqSGYQ_ERL87FSc7k-C" },
-                    { title: "Gamis I", id: "1WUgGKElKs1oU1Pwne38JGGPn3cMAc4ox" },
-                    { title: "Gamis II", id: "1OeCJOINqDVeVdpBgzEOWvYrK9KW6Opr8" },
-                    { title: "Mukena", id: "1DD-y6ceziLZ5kVEIF3UvA5f1QbY43Quh" }
-                ]
-            },
-            'seventhesalon': {
-                title: "Seven The Salon",
-                description: "Dokumentasi before-after dan layanan salon dengan visual mewah yang selaras dengan branding premium.",
-                mainVideo: "cdaeSV1kP2k",
-                videos: [
-                    { title: "Cherry Tamara", id: "1GRtmPwSnrGJ1rA4ePkphhokahHokFFFu" },
-                    { title: "Valora Layer", id: "1rkV90uQn1XGR4dU_ldIK2YZG8j-meMKx" },
-                    { title: "Olive", id: "1yW26qBP6ky79Br0o1IBbc09eZbDbY8dO" },
-                    { title: "Michelle", id: "1ea53Vmmdi0m2ZfYpHSWtIs9BhhsSBCkx" },
-                    { title: "Seminar Caogialoc", id: "19MY8-rKVqEO3j09DWpbSxOuU8HuNBftH" },
-                    { title: "Seminar Schwarzkopf", id: "1dYqIQySzmMPjqTdUeh85j4990IhiCAIm" }
-                ]
-            },
-            'tahutalaga': {
-                title: "Tahu Talaga",
-                description: "Konten dinamis yang menonjolkan keunggulan produk tahu lokal berkualitas dengan visual menggugah.",
-                mainVideo: "d50PmePzW98",
-                videos: [
-                    { title: "Natal 2025", id: "11wdneYzb26nnlStriK_yG08CBigvxPAt" },
-                    { title: "KBP", id: "1j80VtwyCZsxGEvvqL8_V8Q4LFItEhsTp" },
-                    { title: "Kabin", id: "1ZrEYTKqfzsMEcP45cjC7cjejq_jipo9M" },
-                    { title: "Cara Penyimpanan Tahu", id: "1VqtINaVYw4KDDSd8eaW1dqjo1TSJ3ZBB" }
-                ]
-            },
-            'nikuya': {
-                title: "Nikuya",
-                description: "Visual premium untuk brand daging berkualitas dengan fokus wagyu dan salmon dalam kemasan edukatif.",
-                mainVideo: "AVnTfw4XLwI",
-                videos: [
-                    { title: "Salmon Mentah Aman?", id: "1RROsqw_j0M9hUYHykhdS82KcavdZTNiE" },
-                    { title: "Meltique", id: "1_bGUWFzwA4Ka0M7IUx4PDONYlMvYCJln" },
-                    { title: "Sejiwa Coffee", id: "1fglleglQU5hwnewtPvMYmglmyc8EbE3Y" },
-                    { title: "Wheels Coffee", id: "1l8rWJVcwjXJHbGvTBS7ddJXKHVoXat1a" }
-                ]
-            },
-            'pulsefitness': {
-                title: "Pulse Fitness",
-                description: "Konten fitness yang menangkap energi latihan dan semangat hidup sehat dengan visual dinamis motivasi.",
-                mainVideo: "JsNnx8LTC88",
-                videos: [
-                    { title: "Campus Championship", id: "1qTeIcVSMHFucDo7lvTn8jxcJTNR7lNj6" },
-                    { title: "Opening", id: "1z6TpxW-lEu56Ofw3xxPXEmOz0AiWwqFB" },
-                    { title: "Tips Otot Stuk", id: "1DTeTiYxTgS-NnmHsgO31TRa_DQY9TFqW" }
-                ]
-            },
-            'lumitystudio': {
-                title: "Lumity Studio",
-                description: "Video estetik untuk studio olahraga yang menampilkan vibes yoga, zumba, dan aerobik dengan energi positif.",
-                mainVideo: "yuX0l3Zy9EA",
-                videos: [
-                    { title: "Opening", id: "1LXphzlnELQSGiDchoTZwNB52-n6qoD4x" },
-                    { title: "Superhouse Lumity", id: "1XDmNJEVMi0SXDZTDOnOGkH-Gwxv9R8KV" },
-                    { title: "Trampoline Promo", id: "1tVbWens3-QzuxPCNxZ3bvT9rXA0lprET" },
-                    { title: "Trampoline Party", id: "1Px5QORQwYUNcM1CyNMm6t6OlFMUqOlUb" }
-                ]
-            },
-            'skinethica': {
-                title: "Skin Ethica",
-                description: "Konten edukatif klinik kecantikan yang menampilkan layanan premium dan profesionalitas dengan trust.",
-                mainVideo: "tJ-JaP61hS4",
-                videos: [
-                    { title: "Promo Facial", id: "1A29sbb5uCkUT6DQ6MrOKjiAsEA9a2k3z" },
-                    { title: "Gastric Balloon", id: "1vNuHTWF_uTj36wEbCkpjaVTDips_3iDx" }
-                ]
-            },
-            'anitasalon': {
-                title: "Anita Salon",
-                description: "Dokumentasi layanan salon dengan storytelling elegan yang membantu audiens memahami keunggulan brand.",
-                mainVideo: "bqFvUt1fLnI",
-                videos: [
-                    { title: "Listy Chan Pokemon", id: "1w803KiGsj53k0eCYrplu0Yxtl6bPqIHJ" },
-                    { title: "Baba Boom", id: "1JeHkcYMyyO6Q9SQLK63j-esysOt5zbJB" },
-                    { title: "Color Grey", id: "1cNfrWvQ0scBWe5TI6wnlAglCaTZacf5E" }
-                ]
-            },
-            'sambarajo': {
-                title: "Sambarajo",
-                description: "Konten autentik restoran Padang yang menampilkan suasana dan kelezatan masakan khas yang otentik.",
-                mainVideo: "2HYKLLIIwyo",
-                videos: [
-                    { title: "Iga Bakar", id: "1j1pwYc0XvLvDMMSbddCx5cQtQQf0pVT2" },
-                    { title: "Koyor Balado", id: "1pXCaJte8bRPmtZ4YebRISTiiBqUtHQkb" },
-                    { title: "Sop Buntut Marasok", id: "1jAOqv4mZSURW41S6UIzS5zN0MAF-rWmI" },
-                    { title: "Ikan Bilis Baladon", id: "140wEZTbTQPxmaEUklRqkuYU9pSopVwbv" }
-                ]
-            },
-            'peekaboo': {
-                title: "Peek A Boo",
-                description: "Visual dinamis hairstation yang menampilkan layanan styling dengan suasana fun dan stylish klien.",
-                mainVideo: "Bc0aF7EmMkY",
-                videos: [
-                    { title: "Tokyo Wave", id: "1SoHvxfmz33Ce51qTkG3V2MS_Xk_HxCDO" },
-                    { title: "Jocellyn", id: "1A-Bo0MECZyEUrl4nsVBBXo1G9da1PXDy" },
-                    { title: "Aldi Cacing", id: "15-R4uZF7w0MP5ZRQg1eb6dJ6qk3lK-66" },
-                    { title: "Mey Perm", id: "1X2FWve5KYvVJ7uSkJY2_5FBXZXSU00Ng" }
-                ]
             }
         };
         
@@ -931,12 +950,12 @@
             const videoGrid = document.getElementById('videoGrid');
             const clients = Object.keys(clientData);
             
-            const videosHTML = clients.map(clientId => {
+            const videosHTML = clients.map((clientId, index) => {
                 const client = clientData[clientId];
                 const mainVideo = client.videos[0]; // Use first video as preview
                 
                 return `
-                    <div class="gproj-video-item">
+                    <div class="gproj-video-item" style="animation-delay: ${index * 0.08}s;">
                         <div class="gproj-video-thumbnail">
                             <iframe src="https://drive.google.com/file/d/${mainVideo.id}/preview" allowfullscreen loading="lazy"></iframe>
                         </div>
@@ -978,7 +997,7 @@
                 detailPage.id = `detail-${clientId}`;
                 
                 const videosHTML = client.videos.map((video, index) => `
-                    <div class="video-card" onclick="openLightbox(${index})">
+                    <div class="video-card" onclick="openLightbox(${index})" style="animation-delay: ${index * 0.08}s;">
                         <div class="video-wrapper">
                             <iframe src="https://drive.google.com/file/d/${video.id}/preview" allowfullscreen loading="lazy"></iframe>
                         </div>
@@ -1146,6 +1165,19 @@
                 prevVideo();
             }
         }
+        
+        // Scroll optimization
+        let ticking = false;
+        function updateScrollPosition() {
+            ticking = false;
+        }
+        
+        document.addEventListener('scroll', function() {
+            if (!ticking) {
+                requestAnimationFrame(updateScrollPosition);
+                ticking = true;
+            }
+        }, { passive: true });
         
         // Handle messages from parent window
         window.addEventListener('message', function(event) {
