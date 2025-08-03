@@ -463,11 +463,11 @@
         
         @media (max-width: 768px) {
             .popup-overlay { 
-                padding: 20px 10px; /* Changed from 10px to 20px top/bottom */
+                padding: 40px 10px; /* Increased to 40px top/bottom */
             }
             .popup-content {
-                width: 98vw;
-                max-height: 85vh; /* Changed from 90vh to 85vh */
+                width: 96vw;
+                max-height: 75vh; /* Reduced to 75vh for more space */
                 border-radius: 12px;
             }
             
@@ -491,11 +491,11 @@
             }
             
             .body { 
-                max-height: calc(85vh - 56px); /* Adjusted accordingly */
+                max-height: calc(75vh - 56px); /* Adjusted accordingly */
             }
             
             .gproj-gallery-wrapper, .client-detail-page {
-                padding: 20px 15px 30px; /* Added more bottom padding */
+                padding: 25px 15px 35px; /* Increased bottom padding */
             }
             
             .gproj-videos-grid, .videos-grid {
@@ -552,21 +552,21 @@
         
         @media (max-width: 480px) {
             .popup-overlay {
-                padding: 15px 8px; /* Optimized for small screens */
+                padding: 35px 8px; /* Increased to 35px for small screens */
             }
             
             .popup-content {
-                width: 99vw;
-                max-height: 88vh; /* Slightly more height for very small screens */
-                border-radius: 8px; /* Smaller border radius */
+                width: 96vw; /* Slightly smaller width */
+                max-height: 70vh; /* Significantly reduced height */
+                border-radius: 8px;
             }
             
             .body {
-                max-height: calc(88vh - 56px);
+                max-height: calc(70vh - 56px); /* Adjusted accordingly */
             }
             
             .gproj-gallery-wrapper, .client-detail-page {
-                padding: 15px 12px 25px; /* More conservative padding */
+                padding: 20px 12px 30px; /* Increased padding */
             }
             
             .gproj-video-item, .video-card {
@@ -588,15 +588,15 @@
         @supports (padding-top: env(safe-area-inset-top)) {
             @media (max-width: 768px) {
                 .popup-overlay {
-                    padding-top: max(20px, env(safe-area-inset-top));
-                    padding-bottom: max(20px, env(safe-area-inset-bottom));
+                    padding-top: max(40px, calc(env(safe-area-inset-top) + 20px));
+                    padding-bottom: max(40px, calc(env(safe-area-inset-bottom) + 20px));
                 }
             }
             
             @media (max-width: 480px) {
                 .popup-overlay {
-                    padding-top: max(15px, env(safe-area-inset-top));
-                    padding-bottom: max(15px, env(safe-area-inset-bottom));
+                    padding-top: max(35px, calc(env(safe-area-inset-top) + 15px));
+                    padding-bottom: max(35px, calc(env(safe-area-inset-bottom) + 15px));
                 }
             }
         }
