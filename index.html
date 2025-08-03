@@ -36,7 +36,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 40px 20px; /* Increased top/bottom padding */
+            padding: 40px 20px;
             opacity: 0;
             visibility: hidden;
             overflow-y: auto;
@@ -54,7 +54,7 @@
             border-radius: 16px;
             width: 95vw;
             max-width: 1200px;
-            max-height: 80vh; /* Reduced from 85vh to 80vh */
+            max-height: 80vh;
             position: relative;
             overflow: hidden;
             margin: auto;
@@ -134,7 +134,7 @@
         /* Body */
         .body {
             padding: 0;
-            max-height: calc(80vh - 64px); /* Adjusted based on new popup height */
+            max-height: calc(80vh - 64px);
             overflow-y: auto;
             overflow-x: hidden;
             scrollbar-width: none;
@@ -227,7 +227,7 @@
             overflow: hidden;
             border-radius: 12px;
             margin-bottom: 12px;
-            background: transparent; /* Changed from #000 to transparent */
+            background: transparent;
             flex-shrink: 0;
         }
         
@@ -237,8 +237,8 @@
             border: none;
             position: relative;
             z-index: 2;
-            border-radius: 12px; /* Added border radius to iframe */
-            background: transparent; /* Made iframe background transparent */
+            border-radius: 12px;
+            background: transparent;
         }
         
         /* Video Info */
@@ -258,7 +258,7 @@
             margin-bottom: 8px;
             color: #fff;
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-            text-align: center; /* Ensure title is centered */
+            text-align: center;
         }
         
         .gproj-video-description {
@@ -267,7 +267,7 @@
             line-height: 1.4;
             margin-bottom: 16px;
             flex-grow: 1;
-            text-align: center; /* Center align description */
+            text-align: center;
         }
         
         .gproj-project-btn {
@@ -317,7 +317,7 @@
             background-clip: text;
             margin-bottom: 16px;
             line-height: 1.3;
-            text-align: center; /* Ensure detail title is centered */
+            text-align: center;
         }
         
         .detail-description {
@@ -326,7 +326,7 @@
             max-width: 600px;
             margin: 0 auto;
             line-height: 1.6;
-            text-align: center; /* Center align detail description */
+            text-align: center;
         }
         
         .videos-grid {
@@ -368,9 +368,9 @@
         
         .lightbox-video {
             width: 90vw;
-            height: 50.6vw; /* Maintain 16:9 aspect ratio */
+            height: 50.6vw;
             max-width: 1200px;
-            max-height: 675px; /* 1200 * 9/16 */
+            max-height: 675px;
             min-width: 800px;
             min-height: 450px;
             border-radius: 12px;
@@ -401,8 +401,8 @@
         .lightbox-close:hover {
             background: rgba(255, 255, 255, 0.3) !important;
             transform: rotate(90deg) scale(1.1) !important;
-            top: 30px !important; /* Keep position fixed */
-            right: 30px !important; /* Keep position fixed */
+            top: 30px !important;
+            right: 30px !important;
         }
         
         .nav {
@@ -448,13 +448,12 @@
         
         /* Responsive Design */
         @media (max-width: 1366px) and (min-width: 1024px) {
-            /* Laptop specific fixes */
             .popup-overlay {
-                padding: 60px 20px; /* More padding on laptops */
+                padding: 60px 20px;
             }
             
             .popup-content {
-                max-height: 75vh; /* Even smaller on laptops */
+                max-height: 75vh;
             }
             
             .body {
@@ -463,10 +462,12 @@
         }
         
         @media (max-width: 768px) {
-            .popup-overlay { padding: 10px; }
+            .popup-overlay { 
+                padding: 20px 10px; /* Changed from 10px to 20px top/bottom */
+            }
             .popup-content {
                 width: 98vw;
-                max-height: 90vh;
+                max-height: 85vh; /* Changed from 90vh to 85vh */
                 border-radius: 12px;
             }
             
@@ -489,15 +490,18 @@
                 right: 16px !important;
             }
             
-            .body { max-height: calc(90vh - 56px); }
+            .body { 
+                max-height: calc(85vh - 56px); /* Adjusted accordingly */
+            }
             
             .gproj-gallery-wrapper, .client-detail-page {
-                padding: 20px 15px;
+                padding: 20px 15px 30px; /* Added more bottom padding */
             }
             
             .gproj-videos-grid, .videos-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
+                padding-bottom: 20px; /* Extra bottom padding for grid */
             }
             
             .gproj-video-item, .video-card {
@@ -524,9 +528,9 @@
             
             .lightbox-video {
                 width: 95vw;
-                height: 53.4vw; /* 95vw * 9/16 */
+                height: 53.4vw;
                 min-width: 300px;
-                min-height: 169px; /* 300 * 9/16 */
+                min-height: 169px;
                 max-width: 800px;
                 max-height: 450px;
             }
@@ -538,8 +542,8 @@
             }
             
             .lightbox-close:hover {
-                top: 20px; /* Keep mobile position fixed */
-                right: 20px; /* Keep mobile position fixed */
+                top: 20px;
+                right: 20px;
             }
             .nav { font-size: 18px; padding: 10px 14px; }
             .prev { left: 10px; }
@@ -547,14 +551,54 @@
         }
         
         @media (max-width: 480px) {
+            .popup-overlay {
+                padding: 15px 8px; /* Optimized for small screens */
+            }
+            
+            .popup-content {
+                width: 99vw;
+                max-height: 88vh; /* Slightly more height for very small screens */
+                border-radius: 8px; /* Smaller border radius */
+            }
+            
+            .body {
+                max-height: calc(88vh - 56px);
+            }
+            
+            .gproj-gallery-wrapper, .client-detail-page {
+                padding: 15px 12px 25px; /* More conservative padding */
+            }
+            
             .gproj-video-item, .video-card {
                 height: fit-content;
                 padding: 14px;
+                margin-bottom: 5px; /* Small margin to prevent touching edges */
+            }
+            
+            .gproj-video-item:last-child, .video-card:last-child {
+                margin-bottom: 15px; /* Extra margin for last item */
             }
             
             .gproj-video-title, .video-title { font-size: 15px; }
             .gproj-video-description { font-size: 12px; }
             .detail-title { font-size: 20px; }
+        }
+        
+        /* Safe area handling for devices with notches */
+        @supports (padding-top: env(safe-area-inset-top)) {
+            @media (max-width: 768px) {
+                .popup-overlay {
+                    padding-top: max(20px, env(safe-area-inset-top));
+                    padding-bottom: max(20px, env(safe-area-inset-bottom));
+                }
+            }
+            
+            @media (max-width: 480px) {
+                .popup-overlay {
+                    padding-top: max(15px, env(safe-area-inset-top));
+                    padding-bottom: max(15px, env(safe-area-inset-bottom));
+                }
+            }
         }
         
         /* Touch devices */
