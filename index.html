@@ -127,8 +127,7 @@
         .close:hover {
             background: rgba(255, 255, 255, 0.25);
             transform: translateY(-50%) rotate(90deg) scale(1.1);
-            top: 50% !important;
-            right: 24px !important;
+            /* Removed top and right overrides to prevent positioning issues */
         }
         
         /* Body */
@@ -337,13 +336,13 @@
             height: fit-content;
         }
         
-        /* Lightbox */
+        /* Additional styles to ensure lightbox appears above Carrd navbar */
         .lightbox {
             position: fixed;
             inset: 0;
             background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(8px);
-            z-index: 10000;
+            z-index: 99998; /* High z-index for Carrd compatibility */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -379,30 +378,32 @@
         
         .lightbox-close {
             position: fixed;
-            top: 30px;
+            top: 80px; /* Much higher to avoid Carrd navbar */
             right: 30px;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(10px);
-            border: none;
+            background: rgba(0, 0, 0, 0.9); /* More opaque */
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 255, 255, 0.3); /* More visible border */
             color: #fff;
-            font-size: 20px;
+            font-size: 22px; /* Slightly larger */
             cursor: pointer;
-            padding: 12px;
+            padding: 14px;
             border-radius: 50%;
             transition: all 0.3s ease;
-            width: 44px;
-            height: 44px;
+            width: 48px; /* Larger button */
+            height: 48px;
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 10001;
+            z-index: 99999; /* Much higher z-index to go above Carrd navbar */
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7); /* Stronger shadow */
         }
         
         .lightbox-close:hover {
-            background: rgba(255, 255, 255, 0.3) !important;
+            background: rgba(255, 255, 255, 0.9) !important;
+            color: #000 !important;
             transform: rotate(90deg) scale(1.1) !important;
-            top: 30px !important;
-            right: 30px !important;
+            /* Remove top and right to prevent repositioning */
+            border-color: rgba(0, 0, 0, 0.2) !important;
         }
         
         .nav {
@@ -486,8 +487,7 @@
             
             .close:hover {
                 transform: translateY(-50%) rotate(90deg) scale(1.1);
-                top: 50% !important;
-                right: 16px !important;
+                /* Removed positioning overrides */
             }
             
             .body { 
@@ -565,6 +565,14 @@
                 max-height: calc(70vh - 56px); /* Adjusted accordingly */
             }
             
+            .lightbox-close {
+                top: 130px; /* Even lower for small mobile screens */
+                right: 15px;
+                width: 42px;
+                height: 42px;
+                font-size: 18px;
+            }
+            
             .gproj-gallery-wrapper, .client-detail-page {
                 padding: 20px 12px 30px; /* Increased padding */
             }
@@ -584,7 +592,22 @@
             .detail-title { font-size: 20px; }
         }
         
-        /* Safe area handling for devices with notches */
+        /* Safe area handling for lightbox close button */
+        @supports (padding-top: env(safe-area-inset-top)) {
+            .lightbox-close {
+                top: max(40px, calc(env(safe-area-inset-top) + 10px));
+            }
+            
+            @media (max-width: 768px) {
+                .lightbox-close {
+                    top: max(50px, calc(env(safe-area-inset-top) + 20px));
+                }
+                
+                .lightbox-close:hover {
+                    top: max(50px, calc(env(safe-area-inset-top) + 20px)) !important;
+                }
+            }
+        }
         @supports (padding-top: env(safe-area-inset-top)) {
             @media (max-width: 768px) {
                 .popup-overlay {
