@@ -355,18 +355,22 @@
         
         .lightbox-content {
             position: relative;
-            max-width: 80vw;
-            max-height: 80vh;
+            max-width: 90vw;
+            max-height: 90vh;
+            width: 100%;
+            height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
         }
         
         .lightbox-video {
-            max-width: 100%;
-            max-height: 100%;
-            width: auto;
-            height: auto;
+            width: 90vw;
+            height: 50.6vw; /* Maintain 16:9 aspect ratio */
+            max-width: 1200px;
+            max-height: 675px; /* 1200 * 9/16 */
+            min-width: 800px;
+            min-height: 450px;
             border-radius: 12px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
         }
@@ -487,7 +491,19 @@
             .detail-title { font-size: 24px; }
             .detail-description { font-size: 14px; }
             
-            .lightbox-content { max-width: 95vw; max-height: 70vh; }
+            .lightbox-content { 
+                max-width: 95vw; 
+                max-height: 85vh; 
+            }
+            
+            .lightbox-video {
+                width: 95vw;
+                height: 53.4vw; /* 95vw * 9/16 */
+                min-width: 300px;
+                min-height: 169px; /* 300 * 9/16 */
+                max-width: 800px;
+                max-height: 450px;
+            }
             .lightbox-close { top: 20px; right: 20px; width: 36px; height: 36px; }
             .nav { font-size: 18px; padding: 10px 14px; }
             .prev { left: 10px; }
