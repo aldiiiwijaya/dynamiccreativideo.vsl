@@ -366,36 +366,36 @@
         }
         
         .lightbox-video {
-            width: 90vw;
-            height: 50.6vw;
-            max-width: 1200px;
-            max-height: 675px;
-            min-width: 800px;
-            min-height: 450px;
+            width: 80vw; /* Reduced from 90vw */
+            height: 45vw; /* Reduced accordingly (80vw * 9/16) */
+            max-width: 1000px; /* Reduced from 1200px */
+            max-height: 563px; /* Reduced accordingly (1000 * 9/16) */
+            min-width: 600px; /* Reduced from 800px */
+            min-height: 338px; /* Reduced accordingly (600 * 9/16) */
             border-radius: 12px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
         }
         
         .lightbox-close {
             position: fixed;
-            top: 80px; /* Much higher to avoid Carrd navbar */
+            top: 120px; /* Lower for desktop - below typical navbars */
             right: 30px;
-            background: rgba(0, 0, 0, 0.9); /* More opaque */
+            background: rgba(0, 0, 0, 0.9);
             backdrop-filter: blur(15px);
-            border: 2px solid rgba(255, 255, 255, 0.3); /* More visible border */
+            border: 2px solid rgba(255, 255, 255, 0.3);
             color: #fff;
-            font-size: 22px; /* Slightly larger */
+            font-size: 22px;
             cursor: pointer;
             padding: 14px;
             border-radius: 50%;
             transition: all 0.3s ease;
-            width: 48px; /* Larger button */
+            width: 48px;
             height: 48px;
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 99999; /* Much higher z-index to go above Carrd navbar */
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7); /* Stronger shadow */
+            z-index: 99999;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7);
         }
         
         .lightbox-close:hover {
@@ -527,12 +527,12 @@
             }
             
             .lightbox-video {
-                width: 95vw;
-                height: 53.4vw;
-                min-width: 300px;
-                min-height: 169px;
-                max-width: 800px;
-                max-height: 450px;
+                width: 92vw; /* Slightly smaller for mobile */
+                height: 51.8vw; /* Adjusted accordingly (92vw * 9/16) */
+                min-width: 280px; /* Smaller minimum for mobile */
+                min-height: 158px; /* Adjusted accordingly (280 * 9/16) */
+                max-width: 700px; /* Smaller max for mobile */
+                max-height: 394px; /* Adjusted accordingly (700 * 9/16) */
             }
             .lightbox-close { 
                 top: 20px; 
@@ -563,14 +563,6 @@
             
             .body {
                 max-height: calc(70vh - 56px); /* Adjusted accordingly */
-            }
-            
-            .lightbox-close {
-                top: 130px; /* Even lower for small mobile screens */
-                right: 15px;
-                width: 42px;
-                height: 42px;
-                font-size: 18px;
             }
             
             .gproj-gallery-wrapper, .client-detail-page {
