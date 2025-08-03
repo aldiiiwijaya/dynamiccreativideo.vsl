@@ -126,7 +126,9 @@
         
         .close:hover {
             background: rgba(255, 255, 255, 0.25);
-            transform: rotate(90deg) scale(1.1);
+            transform: translateY(-50%) rotate(90deg) scale(1.1);
+            top: 50% !important;
+            right: 24px !important;
         }
         
         /* Body */
@@ -393,11 +395,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            z-index: 10001;
         }
         
         .lightbox-close:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: rotate(90deg) scale(1.1);
+            background: rgba(255, 255, 255, 0.3) !important;
+            transform: rotate(90deg) scale(1.1) !important;
+            top: 30px !important; /* Keep position fixed */
+            right: 30px !important; /* Keep position fixed */
         }
         
         .nav {
@@ -463,6 +468,12 @@
                 right: 16px;
             }
             
+            .close:hover {
+                transform: translateY(-50%) rotate(90deg) scale(1.1);
+                top: 50% !important;
+                right: 16px !important;
+            }
+            
             .body { max-height: calc(90vh - 56px); }
             
             .gproj-gallery-wrapper, .client-detail-page {
@@ -504,7 +515,17 @@
                 max-width: 800px;
                 max-height: 450px;
             }
-            .lightbox-close { top: 20px; right: 20px; width: 36px; height: 36px; }
+            .lightbox-close { 
+                top: 20px; 
+                right: 20px; 
+                width: 36px; 
+                height: 36px; 
+            }
+            
+            .lightbox-close:hover {
+                top: 20px; /* Keep mobile position fixed */
+                right: 20px; /* Keep mobile position fixed */
+            }
             .nav { font-size: 18px; padding: 10px 14px; }
             .prev { left: 10px; }
             .next { right: 10px; }
