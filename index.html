@@ -127,7 +127,6 @@
         .close:hover {
             background: rgba(255, 255, 255, 0.25);
             transform: translateY(-50%) rotate(90deg) scale(1.1);
-            /* Removed top and right overrides to prevent positioning issues */
         }
         
         /* Body */
@@ -187,7 +186,7 @@
             }
         }
         
-        /* Shimmer Effect - Fixed to stay within bounds */
+        /* Shimmer Effect */
         .gproj-video-item::before, .video-card::before {
             content: '';
             position: absolute;
@@ -218,7 +217,7 @@
             z-index: 10;
         }
         
-        /* Video Thumbnail - FIXED */
+        /* Video Thumbnail */
         .gproj-video-thumbnail, .video-wrapper {
             position: relative;
             width: 100%;
@@ -336,13 +335,13 @@
             height: fit-content;
         }
         
-        /* Additional styles to ensure lightbox appears above Carrd navbar */
+        /* Lightbox - FIXED DESKTOP SIZES */
         .lightbox {
             position: fixed;
             inset: 0;
             background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(8px);
-            z-index: 99998; /* High z-index for Carrd compatibility */
+            z-index: 99998;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -366,19 +365,20 @@
         }
         
         .lightbox-video {
-            width: 80vw; /* Reduced from 90vw */
-            height: 45vw; /* Reduced accordingly (80vw * 9/16) */
-            max-width: 1000px; /* Reduced from 1200px */
-            max-height: 563px; /* Reduced accordingly (1000 * 9/16) */
-            min-width: 600px; /* Reduced from 800px */
-            min-height: 338px; /* Reduced accordingly (600 * 9/16) */
+            /* FIXED: Even smaller desktop sizes */
+            width: 55vw; /* Further reduced from 65vw */
+            height: 30.9vw; /* Adjusted accordingly (55vw * 9/16) */
+            max-width: 750px; /* Reduced from 900px */
+            max-height: 422px; /* Adjusted accordingly (750 * 9/16) */
+            min-width: 400px; /* Reduced from 500px */
+            min-height: 225px; /* Adjusted accordingly (400 * 9/16) */
             border-radius: 12px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
         }
         
         .lightbox-close {
             position: fixed;
-            top: 120px; /* Lower for desktop - below typical navbars */
+            top: 60px; /* Further lowered from 80px */
             right: 30px;
             background: rgba(0, 0, 0, 0.9);
             backdrop-filter: blur(15px);
@@ -402,7 +402,6 @@
             background: rgba(255, 255, 255, 0.9) !important;
             color: #000 !important;
             transform: rotate(90deg) scale(1.1) !important;
-            /* Remove top and right to prevent repositioning */
             border-color: rgba(0, 0, 0, 0.2) !important;
         }
         
@@ -460,15 +459,23 @@
             .body {
                 max-height: calc(75vh - 64px);
             }
+            
+            /* Adjust lightbox for smaller desktop screens */
+            .lightbox-video {
+                width: 60vw; /* Reduced from 70vw */
+                height: 33.8vw; /* Adjusted accordingly */
+                max-width: 700px; /* Reduced from 800px */
+                max-height: 394px; /* Adjusted accordingly */
+            }
         }
         
         @media (max-width: 768px) {
             .popup-overlay { 
-                padding: 40px 10px; /* Increased to 40px top/bottom */
+                padding: 40px 10px;
             }
             .popup-content {
                 width: 96vw;
-                max-height: 75vh; /* Reduced to 75vh for more space */
+                max-height: 75vh;
                 border-radius: 12px;
             }
             
@@ -487,21 +494,20 @@
             
             .close:hover {
                 transform: translateY(-50%) rotate(90deg) scale(1.1);
-                /* Removed positioning overrides */
             }
             
             .body { 
-                max-height: calc(75vh - 56px); /* Adjusted accordingly */
+                max-height: calc(75vh - 56px);
             }
             
             .gproj-gallery-wrapper, .client-detail-page {
-                padding: 25px 15px 35px; /* Increased bottom padding */
+                padding: 25px 15px 35px;
             }
             
             .gproj-videos-grid, .videos-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
-                padding-bottom: 20px; /* Extra bottom padding for grid */
+                padding-bottom: 20px;
             }
             
             .gproj-video-item, .video-card {
@@ -527,22 +533,22 @@
             }
             
             .lightbox-video {
-                width: 92vw; /* Slightly smaller for mobile */
-                height: 51.8vw; /* Adjusted accordingly (92vw * 9/16) */
-                min-width: 280px; /* Smaller minimum for mobile */
-                min-height: 158px; /* Adjusted accordingly (280 * 9/16) */
-                max-width: 700px; /* Smaller max for mobile */
-                max-height: 394px; /* Adjusted accordingly (700 * 9/16) */
+                width: 92vw;
+                height: 51.8vw;
+                min-width: 280px;
+                min-height: 158px;
+                max-width: 700px;
+                max-height: 394px;
             }
             .lightbox-close { 
-                top: 20px; 
+                top: 40px; /* Further lowered for mobile */
                 right: 20px; 
                 width: 36px; 
                 height: 36px; 
             }
             
             .lightbox-close:hover {
-                top: 20px;
+                top: 40px; /* Keep consistent on hover */
                 right: 20px;
             }
             .nav { font-size: 18px; padding: 10px 14px; }
@@ -552,31 +558,31 @@
         
         @media (max-width: 480px) {
             .popup-overlay {
-                padding: 35px 8px; /* Increased to 35px for small screens */
+                padding: 35px 8px;
             }
             
             .popup-content {
-                width: 96vw; /* Slightly smaller width */
-                max-height: 70vh; /* Significantly reduced height */
+                width: 96vw;
+                max-height: 70vh;
                 border-radius: 8px;
             }
             
             .body {
-                max-height: calc(70vh - 56px); /* Adjusted accordingly */
+                max-height: calc(70vh - 56px);
             }
             
             .gproj-gallery-wrapper, .client-detail-page {
-                padding: 20px 12px 30px; /* Increased padding */
+                padding: 20px 12px 30px;
             }
             
             .gproj-video-item, .video-card {
                 height: fit-content;
                 padding: 14px;
-                margin-bottom: 5px; /* Small margin to prevent touching edges */
+                margin-bottom: 5px;
             }
             
             .gproj-video-item:last-child, .video-card:last-child {
-                margin-bottom: 15px; /* Extra margin for last item */
+                margin-bottom: 15px;
             }
             
             .gproj-video-title, .video-title { font-size: 15px; }
@@ -587,16 +593,16 @@
         /* Safe area handling for lightbox close button */
         @supports (padding-top: env(safe-area-inset-top)) {
             .lightbox-close {
-                top: max(40px, calc(env(safe-area-inset-top) + 10px));
+                top: max(60px, calc(env(safe-area-inset-top) + 40px)); /* Adjusted for new lower position */
             }
             
             @media (max-width: 768px) {
                 .lightbox-close {
-                    top: max(50px, calc(env(safe-area-inset-top) + 20px));
+                    top: max(40px, calc(env(safe-area-inset-top) + 20px)); /* Lower for mobile */
                 }
                 
                 .lightbox-close:hover {
-                    top: max(50px, calc(env(safe-area-inset-top) + 20px)) !important;
+                    top: max(40px, calc(env(safe-area-inset-top) + 20px)) !important; /* Keep consistent */
                 }
             }
         }
