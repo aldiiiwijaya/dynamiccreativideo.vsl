@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gallery Project Popup</title>
+    <title>Client Video Popup</title>
     <style>
         * {
             margin: 0;
@@ -141,163 +141,10 @@
         
         .body::-webkit-scrollbar { display: none; }
         
-        /* Main Gallery */
-        .main-gallery { display: block; }
-        .main-gallery.hidden { display: none; }
-        
-        .gproj-gallery-wrapper { padding: 30px 20px 40px; }
-        
-        /* Video Grid */
-        .gproj-videos-grid, .videos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
-            max-width: 1000px;
-            margin: 0 auto;
-            justify-content: center;
-        }
-        
-        /* Video Items */
-        .gproj-video-item, .video-card {
-            background: linear-gradient(145deg, rgba(15, 15, 26, 0.85), rgba(26, 26, 46, 0.7));
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-top: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 16px;
-            padding: 16px;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-            opacity: 0;
-            transform: translateY(30px) scale(0.9);
-            animation: videoFadeIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-            cursor: pointer;
-            width: 100%;
-            height: fit-content;
-        }
-        
-        @keyframes videoFadeIn {
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-        
-        /* Shimmer Effect */
-        .gproj-video-item::before, .video-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
-            transition: left 0.6s ease;
-            opacity: 0;
-            z-index: 1;
-            pointer-events: none;
-            border-radius: inherit;
-        }
-        
-        .gproj-video-item:hover::before, .video-card:hover::before {
-            opacity: 1;
-            left: 100%;
-        }
-        
-        /* Hover Effects */
-        .gproj-video-item:hover, .video-card:hover {
-            transform: scale(1.03) translateY(-8px);
-            background: linear-gradient(145deg, rgba(15, 15, 26, 0.9), rgba(26, 26, 46, 0.8));
-            backdrop-filter: blur(15px);
-            border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 20px 40px rgba(122, 102, 204, 0.3);
-            z-index: 10;
-        }
-        
-        /* Video Thumbnail */
-        .gproj-video-thumbnail, .video-wrapper {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 16/9;
-            overflow: hidden;
-            border-radius: 12px;
-            margin-bottom: 12px;
-            background: transparent;
-            flex-shrink: 0;
-        }
-        
-        .gproj-video-thumbnail iframe, .video-wrapper iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            position: relative;
-            z-index: 2;
-            border-radius: 12px;
-            background: transparent;
-        }
-        
-        /* Video Info */
-        .gproj-video-info {
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .gproj-video-title, .video-title {
-            font-size: 18px;
-            font-weight: 600;
-            line-height: 1.3;
-            margin-bottom: 8px;
-            color: #fff;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-            text-align: center;
-        }
-        
-        .gproj-video-description {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 14px;
-            line-height: 1.4;
-            margin-bottom: 16px;
-            flex-grow: 1;
-            text-align: center;
-        }
-        
-        .gproj-project-btn {
-            background: linear-gradient(135deg, rgba(122, 102, 204, 0.9), rgba(107, 70, 193, 0.9));
-            backdrop-filter: blur(10px);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 12px 24px;
-            border-radius: 24px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            align-self: center;
-            box-shadow: 0 4px 12px rgba(122, 102, 204, 0.3);
-            margin-top: auto;
-        }
-        
-        .gproj-project-btn:hover {
-            transform: translateY(-2px);
-            background: linear-gradient(135deg, rgba(139, 115, 217, 0.95), rgba(122, 95, 212, 0.95));
-            box-shadow: 0 6px 16px rgba(122, 102, 204, 0.4);
-        }
-        
-        /* Detail Page */
+        /* Client Detail Page */
         .client-detail-page {
-            display: none;
-            padding: 30px 20px 40px;
-        }
-        
-        .client-detail-page.active {
             display: block;
+            padding: 30px 20px 40px;
             animation: fadeIn 0.5s ease-out;
         }
         
@@ -328,14 +175,110 @@
         }
         
         .videos-grid {
-            margin-top: 32px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            max-width: 1000px;
+            margin: 32px auto 0;
+            justify-content: center;
         }
         
+        /* Video Cards */
         .video-card {
+            background: linear-gradient(145deg, rgba(15, 15, 26, 0.85), rgba(26, 26, 46, 0.7));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            padding: 16px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateY(30px) scale(0.9);
+            animation: videoFadeIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            cursor: pointer;
+            width: 100%;
             height: fit-content;
         }
         
-        /* Lightbox - FIXED DESKTOP SIZES */
+        @keyframes videoFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        /* Shimmer Effect */
+        .video-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+            transition: left 0.6s ease;
+            opacity: 0;
+            z-index: 1;
+            pointer-events: none;
+            border-radius: inherit;
+        }
+        
+        .video-card:hover::before {
+            opacity: 1;
+            left: 100%;
+        }
+        
+        /* Hover Effects */
+        .video-card:hover {
+            transform: scale(1.03) translateY(-8px);
+            background: linear-gradient(145deg, rgba(15, 15, 26, 0.9), rgba(26, 26, 46, 0.8));
+            backdrop-filter: blur(15px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(122, 102, 204, 0.3);
+            z-index: 10;
+        }
+        
+        /* Video Wrapper */
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            background: transparent;
+            flex-shrink: 0;
+        }
+        
+        .video-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            position: relative;
+            z-index: 2;
+            border-radius: 12px;
+            background: transparent;
+        }
+        
+        /* Video Title */
+        .video-title {
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 8px;
+            color: #fff;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Lightbox */
         .lightbox {
             position: fixed;
             inset: 0;
@@ -365,20 +308,19 @@
         }
         
         .lightbox-video {
-            /* FIXED: Even smaller desktop sizes */
-            width: 55vw; /* Further reduced from 65vw */
-            height: 30.9vw; /* Adjusted accordingly (55vw * 9/16) */
-            max-width: 750px; /* Reduced from 900px */
-            max-height: 422px; /* Adjusted accordingly (750 * 9/16) */
-            min-width: 400px; /* Reduced from 500px */
-            min-height: 225px; /* Adjusted accordingly (400 * 9/16) */
+            width: 55vw;
+            height: 30.9vw;
+            max-width: 750px;
+            max-height: 422px;
+            min-width: 400px;
+            min-height: 225px;
             border-radius: 12px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
         }
         
         .lightbox-close {
             position: fixed;
-            top: 60px; /* Further lowered from 80px */
+            top: 60px;
             right: 30px;
             background: rgba(0, 0, 0, 0.9);
             backdrop-filter: blur(15px);
@@ -460,12 +402,11 @@
                 max-height: calc(75vh - 64px);
             }
             
-            /* Adjust lightbox for smaller desktop screens */
             .lightbox-video {
-                width: 60vw; /* Reduced from 70vw */
-                height: 33.8vw; /* Adjusted accordingly */
-                max-width: 700px; /* Reduced from 800px */
-                max-height: 394px; /* Adjusted accordingly */
+                width: 60vw;
+                height: 33.8vw;
+                max-width: 700px;
+                max-height: 394px;
             }
         }
         
@@ -500,29 +441,27 @@
                 max-height: calc(75vh - 56px);
             }
             
-            .gproj-gallery-wrapper, .client-detail-page {
+            .client-detail-page {
                 padding: 25px 15px 35px;
             }
             
-            .gproj-videos-grid, .videos-grid {
+            .videos-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
                 padding-bottom: 20px;
             }
             
-            .gproj-video-item, .video-card {
+            .video-card {
                 padding: 16px;
                 height: fit-content;
                 max-width: none;
             }
             
-            .gproj-video-item:hover, .video-card:hover {
+            .video-card:hover {
                 transform: scale(1.02) translateY(-4px);
             }
             
-            .gproj-video-title, .video-title { font-size: 16px; }
-            .gproj-video-description { font-size: 13px; }
-            .gproj-project-btn { padding: 10px 20px; font-size: 13px; }
+            .video-title { font-size: 16px; }
             
             .detail-title { font-size: 24px; }
             .detail-description { font-size: 14px; }
@@ -541,14 +480,14 @@
                 max-height: 394px;
             }
             .lightbox-close { 
-                top: 40px; /* Further lowered for mobile */
+                top: 40px;
                 right: 20px; 
                 width: 36px; 
                 height: 36px; 
             }
             
             .lightbox-close:hover {
-                top: 40px; /* Keep consistent on hover */
+                top: 40px;
                 right: 20px;
             }
             .nav { font-size: 18px; padding: 10px 14px; }
@@ -571,38 +510,37 @@
                 max-height: calc(70vh - 56px);
             }
             
-            .gproj-gallery-wrapper, .client-detail-page {
+            .client-detail-page {
                 padding: 20px 12px 30px;
             }
             
-            .gproj-video-item, .video-card {
+            .video-card {
                 height: fit-content;
                 padding: 14px;
                 margin-bottom: 5px;
             }
             
-            .gproj-video-item:last-child, .video-card:last-child {
+            .video-card:last-child {
                 margin-bottom: 15px;
             }
             
-            .gproj-video-title, .video-title { font-size: 15px; }
-            .gproj-video-description { font-size: 12px; }
+            .video-title { font-size: 15px; }
             .detail-title { font-size: 20px; }
         }
         
         /* Safe area handling for lightbox close button */
         @supports (padding-top: env(safe-area-inset-top)) {
             .lightbox-close {
-                top: max(60px, calc(env(safe-area-inset-top) + 40px)); /* Adjusted for new lower position */
+                top: max(60px, calc(env(safe-area-inset-top) + 40px));
             }
             
             @media (max-width: 768px) {
                 .lightbox-close {
-                    top: max(40px, calc(env(safe-area-inset-top) + 20px)); /* Lower for mobile */
+                    top: max(40px, calc(env(safe-area-inset-top) + 20px));
                 }
                 
                 .lightbox-close:hover {
-                    top: max(40px, calc(env(safe-area-inset-top) + 20px)) !important; /* Keep consistent */
+                    top: max(40px, calc(env(safe-area-inset-top) + 20px)) !important;
                 }
             }
         }
@@ -624,7 +562,7 @@
         
         /* Touch devices */
         @media (hover: none) and (pointer: coarse) {
-            .gproj-video-item:hover, .video-card:hover {
+            .video-card:hover {
                 transform: none;
                 background: inherit;
                 backdrop-filter: blur(10px);
@@ -632,23 +570,20 @@
                 box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
             }
             
-            .gproj-video-item:active, .video-card:active {
+            .video-card:active {
                 transform: scale(0.98);
                 transition: transform 0.1s ease;
             }
             
-            .gproj-video-item:hover::before, .video-card:hover::before {
+            .video-card:hover::before {
                 opacity: 0;
             }
         }
         
         /* Fallback for browsers without backdrop-filter */
         @supports not (backdrop-filter: blur(10px)) {
-            .gproj-video-item, .video-card {
+            .video-card {
                 background: linear-gradient(145deg, #0f0f1a, #1a1a2e);
-            }
-            .gproj-project-btn {
-                background: linear-gradient(135deg, #7A66CC, #6B46C1);
             }
         }
     </style>
@@ -657,15 +592,17 @@
     <div class="popup-overlay" id="popupOverlay">
         <div class="popup-content">
             <div class="header">
-                <h2 class="title" id="popupTitle">Gallery Project</h2>
-                <button class="close" onclick="handleCloseButton()" type="button">&times;</button>
+                <h2 class="title" id="popupTitle">Client Videos</h2>
+                <button class="close" onclick="closePopup()" type="button">&times;</button>
             </div>
             <div class="body">
-                <div class="main-gallery" id="mainGallery">
-                    <div class="gproj-gallery-wrapper">
-                        <div class="gproj-videos-grid" id="videoGrid">
-                            <div class="loading">Loading videos...</div>
-                        </div>
+                <div class="client-detail-page" id="clientDetailPage">
+                    <div class="detail-header">
+                        <h1 class="detail-title" id="clientTitle">Client Name</h1>
+                        <p class="detail-description" id="clientDescription">Client description</p>
+                    </div>
+                    <div class="videos-grid" id="videosGrid">
+                        <div class="loading">Loading videos...</div>
                     </div>
                 </div>
             </div>
@@ -705,7 +642,6 @@
             'ribsgold': {
                 title: "Ribsgold",
                 description: "Strategi konten unisex fashion yang menyasar pria dan wanita dengan visual modern dan gaya kontemporer.",
-                mainVideo: "gi5C55wAW3s",
                 videos: [
                     { title: "Kemeja Togs", id: "1Z92xucR5FNXt-Vl0QjfScgBPSKNdu2Bn" },
                     { title: "Bevery Unique", id: "19oKWsTqhWSGkc2DNS13pHqwYqqnnv2d2" },
@@ -720,7 +656,6 @@
             'bymanda': {
                 title: "Bymanda",
                 description: "Strategi media sosial kreatif dengan konten visual yang efektif menyampaikan pesan brand dan engagement.",
-                mainVideo: "C1AuZOVSNHE",
                 videos: [
                     { title: "Cadar", id: "1d3kCw4Jrut3qRPqSGYQ_ERL87FSc7k-C" },
                     { title: "Gamis I", id: "1WUgGKElKs1oU1Pwne38JGGPn3cMAc4ox" },
@@ -731,7 +666,6 @@
             'seventhesalon': {
                 title: "Seven The Salon",
                 description: "Dokumentasi before-after dan layanan salon dengan visual mewah yang selaras dengan branding premium.",
-                mainVideo: "cdaeSV1kP2k",
                 videos: [
                     { title: "Cherry Tamara", id: "1GRtmPwSnrGJ1rA4ePkphhokahHokFFFu" },
                     { title: "Valora Layer", id: "1rkV90uQn1XGR4dU_ldIK2YZG8j-meMKx" },
@@ -744,7 +678,6 @@
             'tahutalaga': {
                 title: "Tahu Talaga",
                 description: "Konten dinamis yang menonjolkan keunggulan produk tahu lokal berkualitas dengan visual menggugah.",
-                mainVideo: "d50PmePzW98",
                 videos: [
                     { title: "Natal 2025", id: "11wdneYzb26nnlStriK_yG08CBigvxPAt" },
                     { title: "KBP", id: "1j80VtwyCZsxGEvvqL8_V8Q4LFItEhsTp" },
@@ -755,7 +688,6 @@
             'nikuya': {
                 title: "Nikuya",
                 description: "Visual premium untuk brand daging berkualitas dengan fokus wagyu dan salmon dalam kemasan edukatif.",
-                mainVideo: "AVnTfw4XLwI",
                 videos: [
                     { title: "Salmon Mentah Aman?", id: "1RROsqw_j0M9hUYHykhdS82KcavdZTNiE" },
                     { title: "Meltique", id: "1_bGUWFzwA4Ka0M7IUx4PDONYlMvYCJln" },
@@ -766,7 +698,6 @@
             'pulsefitness': {
                 title: "Pulse Fitness",
                 description: "Konten fitness yang menangkap energi latihan dan semangat hidup sehat dengan visual dinamis motivasi.",
-                mainVideo: "JsNnx8LTC88",
                 videos: [
                     { title: "Campus Championship", id: "1qTeIcVSMHFucDo7lvTn8jxcJTNR7lNj6" },
                     { title: "Opening", id: "1z6TpxW-lEu56Ofw3xxPXEmOz0AiWwqFB" },
@@ -776,7 +707,6 @@
             'lumitystudio': {
                 title: "Lumity Studio",
                 description: "Video estetik untuk studio olahraga yang menampilkan vibes yoga, zumba, dan aerobik dengan energi positif.",
-                mainVideo: "yuX0l3Zy9EA",
                 videos: [
                     { title: "Opening", id: "1LXphzlnELQSGiDchoTZwNB52-n6qoD4x" },
                     { title: "Superhouse Lumity", id: "1XDmNJEVMi0SXDZTDOnOGkH-Gwxv9R8KV" },
@@ -787,7 +717,6 @@
             'skinethica': {
                 title: "Skin Ethica",
                 description: "Konten edukatif klinik kecantikan yang menampilkan layanan premium dan profesionalitas dengan trust.",
-                mainVideo: "tJ-JaP61hS4",
                 videos: [
                     { title: "Promo Facial", id: "1A29sbb5uCkUT6DQ6MrOKjiAsEA9a2k3z" },
                     { title: "Gastric Balloon", id: "1vNuHTWF_uTj36wEbCkpjaVTDips_3iDx" }
@@ -796,7 +725,6 @@
             'anitasalon': {
                 title: "Anita Salon",
                 description: "Dokumentasi layanan salon dengan storytelling elegan yang membantu audiens memahami keunggulan brand.",
-                mainVideo: "bqFvUt1fLnI",
                 videos: [
                     { title: "Listy Chan Pokemon", id: "1w803KiGsj53k0eCYrplu0Yxtl6bPqIHJ" },
                     { title: "Baba Boom", id: "1JeHkcYMyyO6Q9SQLK63j-esysOt5zbJB" },
@@ -806,7 +734,6 @@
             'sambarajo': {
                 title: "Sambarajo",
                 description: "Konten autentik restoran Padang yang menampilkan suasana dan kelezatan masakan khas yang otentik.",
-                mainVideo: "2HYKLLIIwyo",
                 videos: [
                     { title: "Iga Bakar", id: "1j1pwYc0XvLvDMMSbddCx5cQtQQf0pVT2" },
                     { title: "Koyor Balado", id: "1pXCaJte8bRPmtZ4YebRISTiiBqUtHQkb" },
@@ -817,7 +744,6 @@
             'peekaboo': {
                 title: "Peek A Boo",
                 description: "Visual dinamis hairstation yang menampilkan layanan styling dengan suasana fun dan stylish klien.",
-                mainVideo: "Bc0aF7EmMkY",
                 videos: [
                     { title: "Tokyo Wave", id: "1SoHvxfmz33Ce51qTkG3V2MS_Xk_HxCDO" },
                     { title: "Jocellyn", id: "1A-Bo0MECZyEUrl4nsVBBXo1G9da1PXDy" },
@@ -829,96 +755,42 @@
         
         let currentVideos = [];
         let currentIndex = 0;
-        let currentView = 'gallery';
-        let currentClient = null;
         
         // Utility functions
         const getUrlParam = param => new URLSearchParams(window.location.search).get(param);
         const getEl = id => document.getElementById(id);
         const getEls = selector => document.querySelectorAll(selector);
         
-        // Gallery functions
-        function loadGallery() {
-            const videoGrid = getEl('videoGrid');
-            const clients = Object.keys(clientData);
-            
-            const videosHTML = clients.map((clientId, index) => {
-                const client = clientData[clientId];
-                const mainVideo = client.videos[0];
-                
-                return `
-                    <div class="gproj-video-item" style="animation-delay: ${index * 0.1}s;">
-                        <div class="gproj-video-thumbnail">
-                            <iframe src="https://drive.google.com/file/d/${mainVideo.id}/preview" allowfullscreen loading="lazy"></iframe>
-                        </div>
-                        <div class="gproj-video-info">
-                            <h3 class="gproj-video-title">${client.title}</h3>
-                            <p class="gproj-video-description">${client.description}</p>
-                            <button class="gproj-project-btn" onclick="showClientDetail('${clientId}')">View Details</button>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-            
-            videoGrid.innerHTML = videosHTML;
-        }
-        
-        function showClientDetail(clientId) {
-            const mainGallery = getEl('mainGallery');
-            mainGallery.classList.add('hidden');
-            
+        // Load client videos directly
+        function loadClientVideos(clientId) {
             const client = clientData[clientId];
-            if (!client) return;
-            
-            currentView = 'detail';
-            currentClient = clientId;
-            currentVideos = client.videos;
-            
-            let detailPage = getEl(`detail-${clientId}`);
-            if (!detailPage) {
-                detailPage = document.createElement('div');
-                detailPage.className = 'client-detail-page';
-                detailPage.id = `detail-${clientId}`;
-                
-                const videosHTML = client.videos.map((video, index) => `
-                    <div class="video-card" onclick="openLightbox(${index})" style="animation-delay: ${index * 0.1}s;">
-                        <div class="video-wrapper">
-                            <iframe src="https://drive.google.com/file/d/${video.id}/preview" allowfullscreen loading="lazy"></iframe>
-                        </div>
-                        <h3 class="video-title">${video.title}</h3>
-                    </div>
-                `).join('');
-                
-                detailPage.innerHTML = `
-                    <div class="detail-header">
-                        <h1 class="detail-title">${client.title}</h1>
-                        <p class="detail-description">${client.description}</p>
-                    </div>
-                    <div class="videos-grid">
-                        ${videosHTML}
-                    </div>
-                `;
-                
-                document.querySelector('.body').appendChild(detailPage);
+            if (!client) {
+                showError('Client not found');
+                return;
             }
             
-            getEls('.client-detail-page').forEach(page => page.classList.remove('active'));
-            detailPage.classList.add('active');
-            getEl('popupTitle').textContent = client.title;
-        }
-        
-        function showMainGallery() {
-            getEl('mainGallery').classList.remove('hidden');
-            getEls('.client-detail-page').forEach(page => page.classList.remove('active'));
+            currentVideos = client.videos;
             
-            currentView = 'gallery';
-            currentClient = null;
-            currentVideos = [];
-            getEl('popupTitle').textContent = 'Gallery Project';
+            // Update UI
+            getEl('popupTitle').textContent = client.title;
+            getEl('clientTitle').textContent = client.title;
+            getEl('clientDescription').textContent = client.description;
+            
+            // Generate videos HTML
+            const videosHTML = client.videos.map((video, index) => `
+                <div class="video-card" onclick="openLightbox(${index})" style="animation-delay: ${index * 0.1}s;">
+                    <div class="video-wrapper">
+                        <iframe src="https://drive.google.com/file/d/${video.id}/preview" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                    <h3 class="video-title">${video.title}</h3>
+                </div>
+            `).join('');
+            
+            getEl('videosGrid').innerHTML = videosHTML;
         }
         
-        function handleCloseButton() {
-            currentView === 'detail' ? showMainGallery() : closePopup();
+        function showError(message) {
+            getEl('videosGrid').innerHTML = `<div class="error">${message}</div>`;
         }
         
         // Lightbox functions
@@ -983,7 +855,7 @@
                 if (e.key === 'ArrowLeft') prevVideo();
                 if (e.key === 'ArrowRight') nextVideo();
             } else if (e.key === 'Escape') {
-                currentView === 'detail' ? showMainGallery() : closePopup();
+                closePopup();
             }
         });
         
@@ -1010,19 +882,28 @@
         
         // Handle messages from parent window
         window.addEventListener('message', event => {
-            if (event.data && event.data.action === 'loadGallery') {
+            if (event.data && event.data.action === 'loadClient') {
                 const client = event.data.client;
-                client && clientData[client] ? showClientDetail(client) : showMainGallery();
-                showPopup();
+                if (client && clientData[client]) {
+                    loadClientVideos(client);
+                    showPopup();
+                } else {
+                    showError('Client not found');
+                    showPopup();
+                }
             }
         });
         
         // Initialize
         window.addEventListener('load', () => {
-            loadGallery();
             const client = getUrlParam('client');
-            if (client && clientData[client]) showClientDetail(client);
-            setTimeout(showPopup, 100);
+            if (client && clientData[client]) {
+                loadClientVideos(client);
+                setTimeout(showPopup, 100);
+            } else {
+                showError('No client specified or client not found');
+                setTimeout(showPopup, 100);
+            }
         });
     </script>
 </body>
