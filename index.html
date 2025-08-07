@@ -617,7 +617,6 @@
             <button class="nav next" onclick="nextVideo()" type="button">&gt;</button>
         </div>
     </div>
-
     <script>
         const clientData = {
             '8amities': {
@@ -755,6 +754,9 @@
         
         let currentVideos = [];
         let currentIndex = 0;
+        let touchStartX = 0;
+        let touchEndX = 0;
+        let touchStartTime = 0;
         
         // Utility functions
         const getUrlParam = param => new URLSearchParams(window.location.search).get(param);
@@ -854,29 +856,21 @@
                 if (e.key === 'Escape') closeLightbox();
                 if (e.key === 'ArrowLeft') prevVideo();
                 if (e.key === 'ArrowRight') nextVideo();
-            } else if (e.key === 'Escape') {
-                closePopup();
             }
         });
         
-        // Touch events for swipe navigation
-        let touchStartX = 0, touchStartTime = 0;
-        
+        // Touch swipe for lightbox navigation
         getEl('lightbox').addEventListener('touchstart', e => {
-            if (e.target.classList.contains('lightbox-video')) {
-                touchStartX = e.changedTouches[0].screenX;
-                touchStartTime = Date.now();
-            }
+            touchStartX = e.changedTouches[0].screenX;
+            touchStartTime = Date.now();
         }, { passive: true });
-        
+
         getEl('lightbox').addEventListener('touchend', e => {
-            if (e.target.classList.contains('lightbox-video')) {
-                const touchEndX = e.changedTouches[0].screenX;
-                const touchDuration = Date.now() - touchStartTime;
-                
-                if (touchDuration < 300 && Math.abs(touchEndX - touchStartX) > 50) {
-                    touchEndX < touchStartX - 50 ? nextVideo() : touchEndX > touchStartX + 50 ? prevVideo() : null;
-                }
+            touchEndX = e.changedTouches[0].screenX;
+            const touchDuration = Date.now() - touchStartTime;
+
+            if (touchDuration < 300 && Math.abs(touchEndX - touchStartX) > 50) {
+                touchEndX < touchStartX - 50 ? nextVideo() : touchEndX > touchStartX + 50 ? prevVideo() : null;
             }
         }, { passive: true });
         
@@ -894,7 +888,7 @@
             }
         });
         
-        // Initialize
+        // Initialize on page load
         window.addEventListener('load', () => {
             const client = getUrlParam('client');
             if (client && clientData[client]) {
